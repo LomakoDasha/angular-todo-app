@@ -1,0 +1,8 @@
+<mat-toolbar>
+  <form (submit)='onSearch()'>
+    <mat-form-field>
+      <input matInput [(ngModel)]='searchText' name='searchText' placeholder="Search">
+    </mat-form-field>
+    <button mat-raised-button type='submit'>Search</button>
+  </form>
+</mat-toolbar>
