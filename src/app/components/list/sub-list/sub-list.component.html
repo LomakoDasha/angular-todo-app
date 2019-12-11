@@ -1,0 +1,7 @@
+<app-list-item
+  *ngFor='let item of items | filter: searchText'
+  [item]=item
+  (remove)='onRemove($event)'
+>
+
+</app-list-item>

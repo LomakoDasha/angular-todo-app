@@ -10,19 +10,25 @@ export class ListComponent {
   public readonly items = [
     {
       id: 1,
-      title: 'Title1'
+      subList: [
+        {title: 'Title1'}, {title: 'Title2'}
+      ]
     },
     {
       id: 2,
-      title: 'Title2'
+      subList: [
+        {title: 'Title3'}, {title: 'Title4'}
+      ]
     },{
       id: 3,
-      title: 'Title3'
+      subList: [
+        {title: 'Title5'}, {title: 'Title6'}
+      ]
     }
   ];
 
-  public removeItem(item: any) {
-    const index = this.items.findIndex(existingItem => existingItem.id === item.id);
-    this.items.splice(index, 1);
+  public removeItem({list, item}) {
+    const index = list.findIndex(existingItem => existingItem.title === item.title);
+    list.splice(index, 1);
   }
 }
