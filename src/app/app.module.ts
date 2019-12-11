@@ -10,13 +10,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { ListComponent } from './components/list/list.component';
 import { ListItemComponent } from './components/list/list-item/list-item.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchBarComponent,
     ListComponent,
-    ListItemComponent
+    ListItemComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
