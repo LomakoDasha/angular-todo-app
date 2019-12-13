@@ -8,18 +8,36 @@ export class ListService {
     {
       id: 1,
       subList: [
-        {title: 'Title1'}, {title: 'Title2'}
+        {
+          id: 11,
+          title: 'Title1'
+        }, {
+          id: 12,
+          title: 'Title2'
+        }
       ]
     },
     {
       id: 2,
       subList: [
-        {title: 'Title3'}, {title: 'Title4'}
+        {
+          id: 21,
+          title: 'Title3'
+        }, {
+          id: 22,
+          title: 'Title4'
+        }
       ]
     },{
       id: 3,
       subList: [
-        {title: 'Title5'}, {title: 'Title6'}
+        {
+          id: 31,
+          title: 'Title5'
+        }, {
+          id: 32,
+          title: 'Title6'
+        }
       ]
     }
   ];
