@@ -6,7 +6,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./sub-list.component.scss']
 })
 export class SubListComponent {
-  @Input() public items: any[];
+  @Input() public items: { id: string, subList: any };
   @Input() public searchText: string;
   @Output() public remove = new EventEmitter<any>();
   @Output() public edit = new EventEmitter<any>();

@@ -1,6 +1,6 @@
 <app-sub-list
-  *ngFor='let item of items'
-  [items]='item.subList'
+  *ngFor='let item of items$ | async'
+  [items]='item'
   [searchText]='searchText'
   (edit)='editItem($event)'
   (remove)='removeItem($event)'

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ListService } from 'src/app/services/list.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class ListComponent implements OnInit {
   @Input() public searchText: string;
-  public items: any[];
+  public items$: Observable<any>;
 
   constructor(
     private listService: ListService,
@@ -17,7 +18,7 @@ export class ListComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    this.items = this.listService.items;
+    this.items$ = this.listService.itemsState$;
   }
 
   public editItem(item: any) {

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ListService {
-  public readonly items = [
+  private items = [
     {
       id: 1,
       subList: [
@@ -14,7 +15,7 @@ export class ListService {
         }, {
           id: 12,
           title: 'Title2'
-        }
+        },
       ]
     },
     {
@@ -26,9 +27,10 @@ export class ListService {
         }, {
           id: 22,
           title: 'Title4'
-        }
+        },
       ]
-    }, {
+    },
+    {
       id: 3,
       subList: [
         {
@@ -37,10 +39,21 @@ export class ListService {
         }, {
           id: 32,
           title: 'Title6'
-        }
+        },
       ]
-    }
+    },
   ];
+  public itemsState$ = new BehaviorSubject([ ...this.items ]);
+
+  public removeItem({ list, item }) {
+    this.items = this.items.map(
+      (column) => column.id === list.id
+        ? { ...column, subList: column.subList.filter((currentItem) => currentItem.id !== item.id) }
+        : column
+    );
+
+    this.itemsState$.next(this.items);
+  }
 
   public getItemById(id: number) {
     for (const list of this.items) {
@@ -50,10 +63,5 @@ export class ListService {
         }
       }
     }
-  }
-
-  public removeItem({ list, item }) {
-    const index = list.findIndex(existingItem => existingItem.title === item.title);
-    list.splice(index, 1);
   }
 }
