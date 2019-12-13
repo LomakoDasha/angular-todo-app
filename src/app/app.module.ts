@@ -13,6 +13,7 @@ import { ListItemComponent } from './components/list/list-item/list-item.compone
 import { FilterPipe } from './pipes/filter.pipe';
 import { SubListComponent } from './components/list/sub-list/sub-list.component';
 import { TaskPageComponent } from './pages/task-page/task-page.component';
+import { EditPageComponent } from './pages/edit-page/edit-page.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { TaskPageComponent } from './pages/task-page/task-page.component';
     ListItemComponent,
     FilterPipe,
     SubListComponent,
-    TaskPageComponent
+    TaskPageComponent,
+    EditPageComponent
   ],
   imports: [
     BrowserModule,

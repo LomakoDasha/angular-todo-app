@@ -28,7 +28,7 @@ export class ListService {
           title: 'Title4'
         }
       ]
-    },{
+    }, {
       id: 3,
       subList: [
         {
@@ -41,6 +41,16 @@ export class ListService {
       ]
     }
   ];
+
+  public getItemById(id: number) {
+    for (const list of this.items) {
+      for (const item of list.subList) {
+        if (item.id === id) {
+          return item;
+        }
+      }
+    }
+  }
 
   public removeItem({ list, item }) {
     const index = list.findIndex(existingItem => existingItem.title === item.title);
