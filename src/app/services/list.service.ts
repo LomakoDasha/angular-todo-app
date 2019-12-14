@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -63,5 +64,9 @@ export class ListService {
         }
       }
     }
+  }
+
+  public getItems() {
+    return of(this.items).pipe(delay(2000));
   }
 }

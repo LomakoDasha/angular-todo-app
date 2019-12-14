@@ -1,9 +1,13 @@
-<app-sub-list
-  *ngFor='let item of items$ | async'
-  [items]='item'
-  [searchText]='searchText'
-  (edit)='editItem($event)'
-  (remove)='removeItem($event)'
->
-
-</app-sub-list>
+<ng-container *ngIf="!(isLoading$ | async); else loading" >
+  <app-sub-list
+    *ngFor="let item of items$ | async"
+    [items]="item"
+    [searchText]="searchText"
+    (remove)="removeItem($event)"
+    (edit)="editItem($event)"
+  >
+  </app-sub-list>
+</ng-container>
+<ng-template #loading>
+  <mat-spinner></mat-spinner>
+</ng-template>

@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ListService } from 'src/app/services/list.service';
 import { Router } from '@angular/router';
+import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
+
+import { ListState, getLists, getIsLoading } from 'src/app/reducers/list.reducer';
+import { LoadAction, RemoveItemAction } from 'src/app/actions/list.actions';
 
 @Component({
   selector: 'app-list',
@@ -11,14 +14,17 @@ import { Observable } from 'rxjs';
 export class ListComponent implements OnInit {
   @Input() public searchText: string;
   public items$: Observable<any>;
+  public isLoading$: Observable<boolean>;
 
   constructor(
-    private listService: ListService,
-    private router: Router
+    private router: Router,
+    private store: Store<ListState>
   ) { }
 
   public ngOnInit(): void {
-    this.items$ = this.listService.itemsState$;
+    this.items$ = this.store.pipe(select(getLists));
+    this.isLoading$ = this.store.pipe(select(getIsLoading));
+    this.store.dispatch(new LoadAction());
   }
 
   public editItem(item: any) {
@@ -26,6 +32,6 @@ export class ListComponent implements OnInit {
   }
 
   public removeItem(args) {
-    this.listService.removeItem(args);
+    this.store.dispatch(new RemoveItemAction(args));
   }
 }
