@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MatToolbarModule, MatInputModule, MatButtonModule, MatCardModule, MatProgressSpinnerModule } from '@angular/material';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -18,6 +18,8 @@ import { TaskPageComponent } from './pages/task-page/task-page.component';
 import { EditPageComponent } from './pages/edit-page/edit-page.component';
 import * as fromList from './reducers/list.reducer';
 import { ListEffects } from './effects/list.effects';
+import { ItemFormComponent } from './components/item-form/item-form.component';
+import { CreatePageComponent } from './pages/create-page/create-page.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { ListEffects } from './effects/list.effects';
     FilterPipe,
     SubListComponent,
     TaskPageComponent,
-    EditPageComponent
+    EditPageComponent,
+    ItemFormComponent,
+    CreatePageComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +48,8 @@ import { ListEffects } from './effects/list.effects';
     StoreModule.forFeature('tasks', fromList.reducer),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([ListEffects]),
-    StoreDevtoolsModule.instrument()
+    StoreDevtoolsModule.instrument(),
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

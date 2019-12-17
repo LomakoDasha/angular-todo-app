@@ -22,10 +22,12 @@ export function reducer(
 ) {
   switch (action.type) {
     case ListActionTypes.Load: {
-      return {
-        ...state,
-        isLoading: true
-      };
+      return !state.lists.length
+        ? {
+          ...state,
+          isLoading: true
+        }
+        : state;
     }
 
     case ListActionTypes.LoadComplete: {
@@ -48,6 +50,37 @@ export function reducer(
       };
     }
 
+    case ListActionTypes.CreateItem: {
+      return {
+        ...state,
+        lists: state.lists.map(
+          (list, index) => index === 0
+            ? { ...list, subList: [...list.subList].concat(action.payload) }
+            : list
+        )
+      };
+    }
+
+    case ListActionTypes.EditItem: {
+      const { payload } = action;
+
+      return {
+        ...state,
+        lists: state.lists.map(
+          (list, index) => list.subList.some((item) => item.id === payload.id)
+            ? {
+              ...list,
+              subList: list.subList.map(
+                (item) => item.id === payload.id
+                  ? { ...item, ...payload }
+                  : item
+              )
+            }
+            : list
+        )
+      };
+    }
+
     default: {
       return state;
     }
@@ -55,11 +88,26 @@ export function reducer(
 }
 
 export const getListState = createFeatureSelector<ListState>('tasks');
+
 export const getLists = createSelector(
   getListState,
   (state) => state.lists
 );
+
 export const getIsLoading = createSelector(
   getListState,
   (state) => state.isLoading
+);
+
+export const getItemById = createSelector(
+  getLists,
+  (lists, { id }) => {
+    for (const list of lists) {
+      for (const item of list.subList) {
+        if (item.id === id) {
+          return item;
+        }
+      }
+    }
+  }
 );

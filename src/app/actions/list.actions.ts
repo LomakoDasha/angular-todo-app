@@ -4,7 +4,9 @@ export enum ListActionTypes {
   Load = '[List] Load',
   LoadComplete = '[List] Load complete',
   LoadFailed = '[List] Load failed',
-  RemoveItem = '[List] Remove item'
+  RemoveItem = '[List] Remove item',
+  CreateItem = '[List] Create item',
+  EditItem = '[List] Edit item'
 }
 
 export class LoadAction implements Action {
@@ -31,8 +33,22 @@ export class RemoveItemAction implements Action {
   constructor(public payload: any) { }
 }
 
+export class CreateItemAction implements Action {
+  type = ListActionTypes.CreateItem;
+
+  constructor(public payload: any) { }
+}
+
+export class EditItemAction implements Action {
+  type = ListActionTypes.EditItem;
+
+  constructor(public payload: any) { }
+}
+
 export type ListAction =
   | LoadAction
   | LoadCompleteAction
   | LoadFailedAction
-  | RemoveItemAction;
+  | RemoveItemAction
+  | CreateItemAction
+  | EditItemAction;

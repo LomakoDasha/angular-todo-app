@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, of } from 'rxjs';
+import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 @Injectable({
@@ -44,27 +44,6 @@ export class ListService {
       ]
     },
   ];
-  public itemsState$ = new BehaviorSubject([ ...this.items ]);
-
-  public removeItem({ list, item }) {
-    this.items = this.items.map(
-      (column) => column.id === list.id
-        ? { ...column, subList: column.subList.filter((currentItem) => currentItem.id !== item.id) }
-        : column
-    );
-
-    this.itemsState$.next(this.items);
-  }
-
-  public getItemById(id: number) {
-    for (const list of this.items) {
-      for (const item of list.subList) {
-        if (item.id === id) {
-          return item;
-        }
-      }
-    }
-  }
 
   public getItems() {
     return of(this.items).pipe(delay(2000));
