@@ -20,6 +20,7 @@ import * as fromList from './reducers/list.reducer';
 import { ListEffects } from './effects/list.effects';
 import { ItemFormComponent } from './components/item-form/item-form.component';
 import { CreatePageComponent } from './pages/create-page/create-page.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { CreatePageComponent } from './pages/create-page/create-page.component';
     TaskPageComponent,
     EditPageComponent,
     ItemFormComponent,
-    CreatePageComponent
+    CreatePageComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
