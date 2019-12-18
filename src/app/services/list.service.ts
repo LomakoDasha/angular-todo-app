@@ -12,10 +12,12 @@ export class ListService {
       subList: [
         {
           id: 11,
-          title: 'Title1'
+          title: 'Title1',
+          description: 'sometext11'
         }, {
           id: 12,
-          title: 'Title2'
+          title: 'Title2',
+          description: 'sometext12'
         },
       ]
     },
@@ -24,10 +26,12 @@ export class ListService {
       subList: [
         {
           id: 21,
-          title: 'Title3'
+          title: 'Title3',
+          description: 'sometext21'
         }, {
           id: 22,
-          title: 'Title4'
+          title: 'Title4',
+          description: 'sometext22'
         },
       ]
     },
@@ -36,10 +40,12 @@ export class ListService {
       subList: [
         {
           id: 31,
-          title: 'Title5'
+          title: 'Title5',
+          description: 'sometext31'
         }, {
           id: 32,
-          title: 'Title6'
+          title: 'Title6',
+          description: 'sometext32'
         },
       ]
     },

@@ -1,3 +1,5 @@
-<app-search-bar (search)="onSearch($event)"></app-search-bar>
-<app-list [searchText]="searchText"></app-list>
-<a [routerLink]="['new']">Create</a>
+<div class="main__board">
+  <app-search-bar (search)="onSearch($event)"></app-search-bar>
+  <app-list [searchText]="searchText"></app-list>
+  <a [routerLink]="['new']">Create</a>
+</div>

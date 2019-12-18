@@ -1,5 +1,6 @@
 <form [formGroup]="itemForm" (submit)="itemForm.valid && submit()">
   <input type="number" placeholder="id" formControlName="id">
   <input type="text" placeholder="title" formControlName="title">
+  <input type="text" placeholder="description" formControlName="description">
   <button type="submit">Submit</button>
 </form>
