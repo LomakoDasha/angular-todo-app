@@ -1,3 +1,3 @@
 <ng-container *ngIf="item$ | async as item" >
-  <app-item-form [item]="item" (save)="editItem($event)"></app-item-form>
+  <app-item-form [titleOfPage]="titleOfPage" [item]="item" (save)="editItem($event)"></app-item-form>
 </ng-container>

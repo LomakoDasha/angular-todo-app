@@ -8,8 +8,9 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
 })
 export class ItemFormComponent implements OnInit {
   public itemForm: FormGroup;
-  @Output() public save = new EventEmitter();
   @Input() public item: any;
+  @Input() public titleOfPage: string;
+  @Output() public save = new EventEmitter();
 
   constructor(private fb: FormBuilder) { }
 

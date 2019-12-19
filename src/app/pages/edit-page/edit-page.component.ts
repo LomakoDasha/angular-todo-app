@@ -11,9 +11,12 @@ import { EditItemAction } from 'src/app/actions/list.actions';
   styleUrls: ['./edit-page.component.scss']
 })
 export class EditPageComponent {
+  public titleOfPage: string = 'Here you can change the selected ToDo item';
+
   public item$ = this.store.pipe(
     select(getItemById, { id: +this.route.snapshot.params.id })
   );
+
   constructor(private route: ActivatedRoute, private store: Store<ListState>, private router: Router) { }
 
   public editItem(item: any) {

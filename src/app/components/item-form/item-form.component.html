@@ -1,6 +1,15 @@
-<form [formGroup]="itemForm" (submit)="itemForm.valid && submit()">
-  <input type="number" placeholder="id" formControlName="id">
-  <input type="text" placeholder="title" formControlName="title">
-  <input type="text" placeholder="description" formControlName="description">
-  <button type="submit">Submit</button>
-</form>
+<mat-card class="form-wrapper">
+  <h2 class="form-title">{{ titleOfPage }}</h2>
+  <form [formGroup]="itemForm" (submit)="itemForm.valid && submit()">
+    <mat-form-field>
+      <input matInput type="number" placeholder="id" formControlName="id">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" placeholder="title" formControlName="title">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" placeholder="description" formControlName="description">
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </form>
+</mat-card>

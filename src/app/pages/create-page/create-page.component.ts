@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -10,12 +10,10 @@ import { CreateItemAction } from 'src/app/actions/list.actions';
   templateUrl: './create-page.component.html',
   styleUrls: ['./create-page.component.scss']
 })
-export class CreatePageComponent implements OnInit {
+export class CreatePageComponent {
+  public titleOfPage: string = 'Here you can create new ToDo item';
 
   constructor(private store: Store<ListState>, private router: Router, private route: ActivatedRoute) { }
-
-  ngOnInit() {
-  }
 
   public saveItem(value: any) {
     this.store.dispatch(new CreateItemAction(value));
