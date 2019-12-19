@@ -5,6 +5,15 @@ mat-card {
     &:hover {
       animation: rattle 0.3s ease;
     }
+
+    h3 {
+      display: flex;
+      justify-content: space-between;
+    }
+}
+
+.importance-flag {
+  color: rgb(184, 17, 17);
 }
 
 button {

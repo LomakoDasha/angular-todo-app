@@ -13,11 +13,13 @@ export class ListService {
         {
           id: 11,
           title: 'Title1',
-          description: 'sometext11'
+          description: 'sometext11',
+          importanceFlag: false
         }, {
           id: 12,
           title: 'Title2',
-          description: 'sometext12'
+          description: 'sometext12',
+          importanceFlag: true
         },
       ]
     },
@@ -27,11 +29,13 @@ export class ListService {
         {
           id: 21,
           title: 'Title3',
-          description: 'sometext21'
+          description: 'sometext21',
+          importanceFlag: false
         }, {
           id: 22,
           title: 'Title4',
-          description: 'sometext22'
+          description: 'sometext22',
+          importanceFlag: false
         },
       ]
     },
@@ -41,11 +45,13 @@ export class ListService {
         {
           id: 31,
           title: 'Title5',
-          description: 'sometext31'
+          description: 'sometext31',
+          importanceFlag: true
         }, {
           id: 32,
           title: 'Title6',
-          description: 'sometext32'
+          description: 'sometext32',
+          importanceFlag: true
         },
       ]
     },

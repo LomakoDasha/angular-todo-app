@@ -18,10 +18,11 @@ export class ItemFormComponent implements OnInit {
     this.itemForm = this.fb.group({
       id: ['', [Validators.required, this.isInteger]],
       title: ['', Validators.required],
-      description: ['', Validators.required]
+      description: ['', Validators.required],
+      importanceFlag: ['', Validators.required]
     });
 
-    if(this.item) {
+    if (this.item) {
       this.itemForm.setValue(this.item);
     }
   }
@@ -31,6 +32,11 @@ export class ItemFormComponent implements OnInit {
   }
 
   public submit() {
+    if (this.itemForm.value.importanceFlag === 'true') {
+      this.itemForm.value.importanceFlag = true;
+    } else {
+      this.itemForm.value.importanceFlag = false;
+    }
     console.log('submit', this.itemForm.value);
     this.save.emit(this.itemForm.value);
   }
