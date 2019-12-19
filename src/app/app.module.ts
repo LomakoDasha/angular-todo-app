@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MatToolbarModule, MatInputModule, MatButtonModule, MatCardModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatToolbarModule, MatInputModule, MatButtonModule, MatCardModule, MatProgressSpinnerModule, MatIconModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -47,6 +47,7 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
     MatButtonModule,
     MatCardModule,
     MatProgressSpinnerModule,
+    MatIconModule,
     FormsModule,
     StoreModule.forRoot({}),
     StoreModule.forFeature('tasks', fromList.reducer),

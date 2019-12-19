@@ -1,6 +1,12 @@
 <mat-card>
-  {{ item.title }}
-  {{ item.description }}
-  <button mat-button (click)="onEdit()">Edit</button>
-  <button mat-button (click)="onRemove()">Remove</button>
+  <h3>{{ item.title }}</h3>
+  <p>{{ item.description }}</p>
+  <button mat-raised-button color="primary" (click)="onEdit()">
+    <mat-icon>edit</mat-icon>
+    <span>Edit</span>
+  </button>
+  <button mat-raised-button color="primary" (click)="onRemove()">
+    <mat-icon>delete</mat-icon>
+    <span>Delete</span>
+  </button>
 </mat-card>
