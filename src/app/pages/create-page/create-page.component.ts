@@ -17,7 +17,7 @@ export class CreatePageComponent {
   constructor(private store: Store<ListState>, private router: Router, private route: ActivatedRoute) { }
 
   public saveItem(value: Item) {
-    this.store.dispatch(new CreateItemAction(value));
-    this.router.navigate(['../'], { relativeTo: this.route });
+    this.store.dispatch(new CreateItemAction(value, Number(this.route.snapshot.params.id)));
+    this.router.navigate(['../../'], { relativeTo: this.route });
   }
 }

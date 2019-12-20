@@ -6,7 +6,7 @@
     (remove)="onRemove($event)"
   >
   </app-list-item>
-  <button mat-button [routerLink]="['new']">
+  <button mat-button (click)="onCreate()" >
     <mat-icon>add</mat-icon>
     <span>Create</span>
   </button>

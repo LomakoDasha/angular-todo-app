@@ -10,37 +10,35 @@ export enum ListActionTypes {
 }
 
 export class LoadAction implements Action {
-  type = ListActionTypes.Load;
-
-  constructor(public payload?: any) { }
+  public readonly type = ListActionTypes.Load;
 }
 
 export class LoadCompleteAction implements Action {
-  type = ListActionTypes.LoadComplete;
+  public readonly type = ListActionTypes.LoadComplete;
 
   constructor(public payload: any) { }
 }
 
 export class LoadFailedAction implements Action {
-  type = ListActionTypes.LoadFailed;
+  public readonly type = ListActionTypes.LoadFailed;
 
   constructor(public payload: string) { }
 }
 
-export class RemoveItemAction implements Action {
-  type = ListActionTypes.RemoveItem;
-
-  constructor(public payload: any) { }
-}
-
 export class CreateItemAction implements Action {
-  type = ListActionTypes.CreateItem;
+  public readonly type = ListActionTypes.CreateItem;
 
-  constructor(public payload: any) { }
+  constructor(public payload: any, public route: number) { }
 }
 
 export class EditItemAction implements Action {
-  type = ListActionTypes.EditItem;
+  public readonly type = ListActionTypes.EditItem;
+
+  constructor(public payload: any) { }
+}
+
+export class RemoveItemAction implements Action {
+  public readonly type = ListActionTypes.RemoveItem;
 
   constructor(public payload: any) { }
 }

@@ -37,25 +37,15 @@ export function reducer(
       };
     }
 
-    case ListActionTypes.RemoveItem: {
-      const { list, item } = action.payload;
-
-      return {
-        ...state,
-        lists: state.lists.map(
-          (column) => column.id === list.id
-            ? { ...column, subList: column.subList.filter((currentItem) => currentItem.id !== item.id) }
-            : column
-        )
-      };
-    }
-
     case ListActionTypes.CreateItem: {
+      const { payload, route } = action;
+
       return {
         ...state,
         lists: state.lists.map(
-          (list, index) => index === 0
-            ? { ...list, subList: [...list.subList].concat(action.payload) }
+
+          (list, index) => index === route-1
+            ? { ...list, subList: [...list.subList].concat(payload) }
             : list
         )
       };
@@ -67,7 +57,7 @@ export function reducer(
       return {
         ...state,
         lists: state.lists.map(
-          (list, index) => list.subList.some((item) => item.id === payload.id)
+          (list) => list.subList.some((item) => item.id === payload.id)
             ? {
               ...list,
               subList: list.subList.map(
@@ -77,6 +67,19 @@ export function reducer(
               )
             }
             : list
+        )
+      };
+    }
+
+    case ListActionTypes.RemoveItem: {
+      const { list, item } = action.payload;
+
+      return {
+        ...state,
+        lists: state.lists.map(
+          (column) => column.id === list.id
+            ? { ...column, subList: column.subList.filter((currentItem) => currentItem.id !== item.id) }
+            : column
         )
       };
     }

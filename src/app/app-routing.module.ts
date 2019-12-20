@@ -10,7 +10,7 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
 const routes: Routes = [
   { path: '', redirectTo: 'list', pathMatch: 'full' },
   { path: 'list', component: TaskPageComponent },
-  { path: 'list/new', component: CreatePageComponent },
+  { path: 'new/:id', component: CreatePageComponent },
   { path: 'edit/:id', component: EditPageComponent },
   { path: '**', component: NotFoundPageComponent }
 ];

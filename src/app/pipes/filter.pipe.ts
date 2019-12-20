@@ -7,7 +7,6 @@ import { Item } from '../models/toDoitem';
 export class FilterPipe implements PipeTransform {
 
   transform(value: Item[], criterion: string): Item[] {
-    console.log('transform value', value)
     return criterion
       ? value.filter((item: { title: string }) => item.title.startsWith(criterion))
       : value;

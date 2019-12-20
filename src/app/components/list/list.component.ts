@@ -35,4 +35,8 @@ export class ListComponent implements OnInit {
   public removeItem(args) {
     this.store.dispatch(new RemoveItemAction(args));
   }
+
+  public createItem(args) {
+    this.router.navigate(['new', args.id]);
+  }
 }
