@@ -1,7 +1,10 @@
 div {
   margin: 5px;
+  padding: 5px;
   border: 3px inset rgb(167, 155, 155);
   background-color: rgba(236, 235, 235, 0.8);
+  max-height: 80vh;
+  overflow-y: scroll;
 
   button:only-child {
     display: none;
@@ -9,7 +12,6 @@ div {
 
   button {
     width: 100%;
-    // background-color: red;
   }
 }
 

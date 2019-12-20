@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
+import { Item } from 'src/app/models/toDoitem';
+
 @Component({
   selector: 'app-item-form',
   templateUrl: './item-form.component.html',
@@ -8,7 +10,7 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
 })
 export class ItemFormComponent implements OnInit {
   public itemForm: FormGroup;
-  @Input() public item: any;
+  @Input() public item: Item;
   @Input() public titleOfPage: string;
   @Output() public save = new EventEmitter();
 
@@ -37,7 +39,6 @@ export class ItemFormComponent implements OnInit {
     } else {
       this.itemForm.value.importanceFlag = false;
     }
-    console.log('submit', this.itemForm.value);
     this.save.emit(this.itemForm.value);
   }
 }

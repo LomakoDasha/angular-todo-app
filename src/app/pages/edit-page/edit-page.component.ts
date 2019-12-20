@@ -4,6 +4,7 @@ import { select, Store } from '@ngrx/store';
 
 import { getItemById, ListState } from 'src/app/reducers/list.reducer';
 import { EditItemAction } from 'src/app/actions/list.actions';
+import { Item } from 'src/app/models/toDoitem';
 
 @Component({
   selector: 'app-edit-page',
@@ -19,7 +20,7 @@ export class EditPageComponent {
 
   constructor(private route: ActivatedRoute, private store: Store<ListState>, private router: Router) { }
 
-  public editItem(item: any) {
+  public editItem(item: Item) {
     this.store.dispatch(new EditItemAction(item));
     this.router.navigate(['/list']);
   }

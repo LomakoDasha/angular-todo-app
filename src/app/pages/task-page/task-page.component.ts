@@ -10,7 +10,5 @@ export class TaskPageComponent {
 
   public onSearch(criterion: string) {
     this.searchText = criterion;
-
-    console.log(this.searchText)
   }
 }

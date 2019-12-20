@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Item } from 'src/app/models/toDoitem';
 
 @Component({
   selector: 'app-sub-list',
@@ -6,19 +7,19 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./sub-list.component.scss']
 })
 export class SubListComponent {
-  @Input() public items: { id: string, subList: any };
+  @Input() public items: { id: number, subList: Item };
   @Input() public searchText: string;
   @Output() public remove = new EventEmitter<any>();
   @Output() public edit = new EventEmitter<any>();
 
-  onRemove(item: any) {
+  onRemove(item: Item) {
     this.remove.emit({
       list: this.items,
       item
     });
   }
 
-  onEdit(item: any) {
+  onEdit(item: Item) {
     this.edit.emit(item);
   }
 }

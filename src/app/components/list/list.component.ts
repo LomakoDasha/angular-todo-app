@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 
 import { ListState, getLists, getIsLoading } from 'src/app/reducers/list.reducer';
 import { LoadAction, RemoveItemAction } from 'src/app/actions/list.actions';
+import { Item } from 'src/app/models/toDoitem';
 
 @Component({
   selector: 'app-list',
@@ -27,7 +28,7 @@ export class ListComponent implements OnInit {
     this.store.dispatch(new LoadAction());
   }
 
-  public editItem(item: any) {
+  public editItem(item: Item) {
     this.router.navigate(['edit', item.id]);
   }
 

@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { ListState } from 'src/app/reducers/list.reducer';
 import { CreateItemAction } from 'src/app/actions/list.actions';
+import { Item } from 'src/app/models/toDoitem';
 
 @Component({
   selector: 'app-create-page',
@@ -15,7 +16,7 @@ export class CreatePageComponent {
 
   constructor(private store: Store<ListState>, private router: Router, private route: ActivatedRoute) { }
 
-  public saveItem(value: any) {
+  public saveItem(value: Item) {
     this.store.dispatch(new CreateItemAction(value));
     this.router.navigate(['../'], { relativeTo: this.route });
   }
