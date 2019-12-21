@@ -1,6 +1,6 @@
 <mat-card>
   <h3>
-    {{ item.title }}
+    {{ item.title | titlecase }}
     <mat-icon *ngIf="item.importanceFlag" class="importance-flag">flag</mat-icon>
   </h3>
   <p>{{ item.description }}</p>

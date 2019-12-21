@@ -8,7 +8,7 @@ export class FilterPipe implements PipeTransform {
 
   transform(value: Item[], criterion: string): Item[] {
     return criterion
-      ? value.filter((item: { title: string }) => item.title.startsWith(criterion))
+      ? value.filter((item: { title: string }) => item.title.toLowerCase().startsWith(criterion.toLowerCase()))
       : value;
   }
 
