@@ -1,0 +1,22 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .form-wrapper {
+    margin-top: 10%;
+    padding: 30px;
+    width: 40%;
+
+    .form-title {
+      font-weight: 700;
+      display: flex;
+      justify-content: center;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

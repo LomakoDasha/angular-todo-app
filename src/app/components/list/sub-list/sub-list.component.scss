@@ -1,4 +1,4 @@
-div {
+.list-wrapper {
   margin: 5px;
   padding: 5px;
   border: 3px inset rgb(167, 155, 155);
@@ -6,13 +6,35 @@ div {
   border-radius: 8px;
   max-height: 80vh;
   overflow-y: scroll;
+}
 
-  button:only-child {
-    display: none;
+.label-wrapper {
+  display: flex;
+  justify-content: space-between;
+  user-select: none;
+
+  .title-label {
+    font-size: 1.2em;
+    letter-spacing: 2px;
+    margin: 5px;
   }
 
-  button {
-    width: 100%;
+  .button-wrapper {
+    width: 50%;
+    display: flex;
+    visibility: hidden;
   }
+}
+
+.label-wrapper:hover .button-wrapper{
+  visibility: visible;
+}
+
+.create-button:only-child {
+  display: none;
+}
+
+.create-button {
+  width: 100%;
 }
 

@@ -7,11 +7,12 @@ import { Item } from 'src/app/models/toDoitem';
   styleUrls: ['./sub-list.component.scss']
 })
 export class SubListComponent {
-  @Input() public items: { id: number, subList: Item };
+  @Input() public items: { id: number, listTitle: string, subList: Item };
   @Input() public searchText: string;
   @Output() public remove = new EventEmitter<any>();
   @Output() public edit = new EventEmitter<any>();
   @Output() public create = new EventEmitter<any>();
+  @Output() public labelEdit = new EventEmitter<any>();
 
   onRemove(item: Item) {
     this.remove.emit({
@@ -25,7 +26,10 @@ export class SubListComponent {
   }
 
   public onCreate() {
-    console.log('onCreate', this.items)
     this.create.emit(this.items);
+  }
+
+  public onLabelEdit() {
+    this.labelEdit.emit(this.items);
   }
 }

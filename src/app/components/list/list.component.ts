@@ -39,4 +39,8 @@ export class ListComponent implements OnInit {
   public createItem(args) {
     this.router.navigate(['new', args.id]);
   }
+
+  public onLabelEdit(args) {
+    this.router.navigate(['editLabel', args.id]);
+  }
 }

@@ -1,0 +1,23 @@
+<mat-card class="form-wrapper">
+  <h2 class="form-title">Here you can create new ToDo item</h2>
+  <form [formGroup]="itemForm" (submit)="itemForm.valid && submit()">
+    <mat-form-field>
+      <input matInput type="number" placeholder="id" formControlName="id">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="text" placeholder="title" formControlName="title">
+    </mat-form-field>
+
+    <mat-form-field>
+      <textarea matInput placeholder="description" rows="3" formControlName="description"></textarea>
+    </mat-form-field>
+
+    <label>Is it important or urgent task ?</label>
+    <mat-radio-group class="form-radio-group" formControlName="importanceFlag">
+      <mat-radio-button class="form-radio-button" value=true>Yes</mat-radio-button>
+      <mat-radio-button class="form-radio-button" value=false>No</mat-radio-button>
+    </mat-radio-group>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </form>
+</mat-card>

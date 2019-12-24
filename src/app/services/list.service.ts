@@ -9,6 +9,7 @@ export class ListService {
   private items = [
     {
       id: 1,
+      listTitle: 'Label1',
       subList: [
         {
           id: 11,
@@ -25,6 +26,7 @@ export class ListService {
     },
     {
       id: 2,
+      listTitle: 'Label2',
       subList: [
         {
           id: 21,
@@ -41,6 +43,7 @@ export class ListService {
     },
     {
       id: 3,
+      listTitle: 'Label3',
       subList: [
         {
           id: 31,

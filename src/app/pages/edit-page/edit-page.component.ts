@@ -12,10 +12,8 @@ import { Item } from 'src/app/models/toDoitem';
   styleUrls: ['./edit-page.component.scss']
 })
 export class EditPageComponent {
-  public titleOfPage: string = 'Here you can change the selected ToDo item';
-
   public item$ = this.store.pipe(
-    select(getItemById, { id: +this.route.snapshot.params.id })
+    select(getItemById, { id: Number(this.route.snapshot.params.id) })
   );
 
   constructor(private route: ActivatedRoute, private store: Store<ListState>, private router: Router) { }

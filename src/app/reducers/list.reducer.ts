@@ -4,6 +4,7 @@ import { ListAction, ListActionTypes } from '../actions/list.actions';
 export interface ListState {
   lists: Array<{
     id: number,
+    listTitle: string,
     subList: Array<{
       id: number,
       title: string
@@ -44,7 +45,7 @@ export function reducer(
         ...state,
         lists: state.lists.map(
 
-          (list, index) => index === route-1
+          (list, index) => index === route - 1
             ? { ...list, subList: [...list.subList].concat(payload) }
             : list
         )
@@ -84,6 +85,19 @@ export function reducer(
       };
     }
 
+    case ListActionTypes.EditLabel: {
+      const { payload } = action;
+
+      return {
+        ...state,
+        lists: state.lists.map(
+          (list) => list.id === payload.id
+            ? { ...list, ...payload }
+            : list
+        )
+      };
+    }
+
     default: {
       return state;
     }
@@ -100,6 +114,17 @@ export const getLists = createSelector(
 export const getIsLoading = createSelector(
   getListState,
   (state) => state.isLoading
+);
+
+export const getListById = createSelector(
+  getLists,
+  (lists, { id }) => {
+    for (const list of lists) {
+      if (list.id === id) {
+        return list;
+      }
+    }
+  }
 );
 
 export const getItemById = createSelector(

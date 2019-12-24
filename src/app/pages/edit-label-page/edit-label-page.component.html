@@ -1,0 +1,4 @@
+<ng-container *ngIf="item$ | async as item" >
+  <app-label-form [item]="item" (save)= "editLabel($event)"></app-label-form>
+</ng-container>
+

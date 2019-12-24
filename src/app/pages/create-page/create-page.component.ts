@@ -12,12 +12,11 @@ import { Item } from 'src/app/models/toDoitem';
   styleUrls: ['./create-page.component.scss']
 })
 export class CreatePageComponent {
-  public titleOfPage: string = 'Here you can create new ToDo item';
 
   constructor(private store: Store<ListState>, private router: Router, private route: ActivatedRoute) { }
 
   public saveItem(value: Item) {
     this.store.dispatch(new CreateItemAction(value, Number(this.route.snapshot.params.id)));
-    this.router.navigate(['../../'], { relativeTo: this.route });
+    this.router.navigate(['/list']);
   }
 }

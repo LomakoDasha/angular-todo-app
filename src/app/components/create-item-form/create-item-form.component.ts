@@ -1,17 +1,16 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
 import { Item } from 'src/app/models/toDoitem';
 
 @Component({
-  selector: 'app-item-form',
-  templateUrl: './item-form.component.html',
-  styleUrls: ['./item-form.component.scss']
+  selector: 'app-create-item-form',
+  templateUrl: './create-item-form.component.html',
+  styleUrls: ['./create-item-form.component.scss']
 })
-export class ItemFormComponent implements OnInit {
+export class CreateItemFormComponent implements OnInit {
   public itemForm: FormGroup;
   @Input() public item: Item;
-  @Input() public titleOfPage: string;
   @Output() public save = new EventEmitter();
 
   constructor(private fb: FormBuilder) { }

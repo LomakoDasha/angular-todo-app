@@ -1,6 +1,7 @@
 mat-card {
   border: 3px double #000;
   margin: 5px 3px;
+  user-select: none;
 
     &:hover {
       animation: rattle 0.3s ease;

@@ -18,10 +18,13 @@ import { TaskPageComponent } from './pages/task-page/task-page.component';
 import { EditPageComponent } from './pages/edit-page/edit-page.component';
 import * as fromList from './reducers/list.reducer';
 import { ListEffects } from './effects/list.effects';
-import { ItemFormComponent } from './components/item-form/item-form.component';
 import { CreatePageComponent } from './pages/create-page/create-page.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import { LabelFormComponent } from './components/label-form/label-form.component';
+import { EditLabelPageComponent } from './pages/edit-label-page/edit-label-page.component';
+import { EditItemFormComponent } from './components/edit-item-form/edit-item-form.component';
+import { CreateItemFormComponent } from './components/create-item-form/create-item-form.component';
 
 @NgModule({
   declarations: [
@@ -33,10 +36,13 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
     SubListComponent,
     TaskPageComponent,
     EditPageComponent,
-    ItemFormComponent,
     CreatePageComponent,
     HeaderComponent,
-    NotFoundPageComponent
+    NotFoundPageComponent,
+    LabelFormComponent,
+    EditLabelPageComponent,
+    EditItemFormComponent,
+    CreateItemFormComponent
   ],
   imports: [
     BrowserModule,

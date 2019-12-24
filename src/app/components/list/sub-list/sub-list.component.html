@@ -1,4 +1,12 @@
-<div>
+<div class="list-wrapper">
+  <div class="label-wrapper">
+    <h2 class="title-label">{{ items.listTitle | uppercase }}</h2>
+    <div class="button-wrapper">
+      <button mat-stroked-button (click)="onLabelEdit()">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </div>
+  </div>
   <app-list-item
     *ngFor="let item of items.subList | filter: searchText"
     [item]=item
@@ -6,7 +14,7 @@
     (remove)="onRemove($event)"
   >
   </app-list-item>
-  <button mat-button (click)="onCreate()" >
+  <button mat-button (click)="onCreate()" class="create-button">
     <mat-icon>add</mat-icon>
     <span>Create</span>
   </button>

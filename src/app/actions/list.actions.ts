@@ -6,7 +6,8 @@ export enum ListActionTypes {
   LoadFailed = '[List] Load failed',
   RemoveItem = '[List] Remove item',
   CreateItem = '[List] Create item',
-  EditItem = '[List] Edit item'
+  EditItem = '[List] Edit item',
+  EditLabel = '[List] Edit list label'
 }
 
 export class LoadAction implements Action {
@@ -43,10 +44,17 @@ export class RemoveItemAction implements Action {
   constructor(public payload: any) { }
 }
 
+export class EditLabelAction implements Action {
+  public readonly type = ListActionTypes.EditLabel;
+
+  constructor(public payload: any) { }
+}
+
 export type ListAction =
   | LoadAction
   | LoadCompleteAction
   | LoadFailedAction
   | RemoveItemAction
   | CreateItemAction
-  | EditItemAction;
+  | EditItemAction
+  | EditLabelAction;
