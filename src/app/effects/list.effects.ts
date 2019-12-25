@@ -6,7 +6,8 @@ import { EMPTY } from 'rxjs';
 
 import { ListActionTypes, LoadCompleteAction } from '../actions/list.actions';
 import { ListService } from '../services/list.service';
-import { getIsLoading, ListState } from '../reducers/list.reducer';
+import { getIsLoading } from '../reducers/list.reducer';
+import { ListState } from '../models/toDoitem';
 
 @Injectable()
 export class ListEffects {

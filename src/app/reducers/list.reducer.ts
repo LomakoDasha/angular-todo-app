@@ -1,17 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { ListAction, ListActionTypes } from '../actions/list.actions';
 
-export interface ListState {
-  lists: Array<{
-    id: number,
-    listTitle: string,
-    subList: Array<{
-      id: number,
-      title: string
-    }>
-  }>;
-  isLoading?: boolean;
-}
+import { ListAction, ListActionTypes } from '../actions/list.actions';
+import { ListState } from '../models/toDoitem';
 
 export const initialState: ListState = {
   lists: [],

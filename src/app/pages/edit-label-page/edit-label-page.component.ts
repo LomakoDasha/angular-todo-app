@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 
-import { ListState, getListById } from 'src/app/reducers/list.reducer';
+import { getListById } from 'src/app/reducers/list.reducer';
 import { EditLabelAction } from 'src/app/actions/list.actions';
+import { ListState, ListOfItems } from 'src/app/models/toDoitem';
 
 @Component({
   selector: 'app-edit-label-page',
@@ -17,7 +18,7 @@ export class EditLabelPageComponent {
 
   constructor(private store: Store<ListState>, private router: Router, private route: ActivatedRoute) { }
 
-  public editLabel(item: any) {
+  public editLabel(item: ListOfItems) {
     this.store.dispatch(new EditLabelAction(item));
     this.router.navigate(['/list']);
   }

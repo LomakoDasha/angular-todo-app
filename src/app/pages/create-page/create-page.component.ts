@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { ListState } from 'src/app/reducers/list.reducer';
 import { CreateItemAction } from 'src/app/actions/list.actions';
-import { Item } from 'src/app/models/toDoitem';
+import { Item, ListState } from 'src/app/models/toDoitem';
 
 @Component({
   selector: 'app-create-page',

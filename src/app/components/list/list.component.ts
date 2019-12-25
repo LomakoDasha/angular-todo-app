@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { ListState, getLists, getIsLoading } from 'src/app/reducers/list.reducer';
+import { getLists, getIsLoading } from 'src/app/reducers/list.reducer';
 import { LoadAction, RemoveItemAction } from 'src/app/actions/list.actions';
-import { Item } from 'src/app/models/toDoitem';
+import { Item, ListState } from 'src/app/models/toDoitem';
 
 @Component({
   selector: 'app-list',
