@@ -34,8 +34,7 @@ export function reducer(
       return {
         ...state,
         lists: state.lists.map(
-
-          (list, index) => index === route - 1
+          (list) => list.id === route
             ? { ...list, subList: [...list.subList].concat(payload) }
             : list
         )
@@ -85,6 +84,16 @@ export function reducer(
             ? { ...list, ...payload }
             : list
         )
+      };
+    }
+
+    case ListActionTypes.RemoveList: {
+      const { payload } = action;
+      state.lists.splice(payload.id-1, 1)
+
+      return {
+        ...state,
+        lists: state.lists
       };
     }
 

@@ -4,8 +4,8 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { getLists, getIsLoading } from 'src/app/reducers/list.reducer';
-import { LoadAction, RemoveItemAction } from 'src/app/actions/list.actions';
-import { Item, ListState } from 'src/app/models/toDoitem';
+import { LoadAction, RemoveItemAction, RemoveListAction } from 'src/app/actions/list.actions';
+import { Item, ListState, ListOfItems } from 'src/app/models/toDoitem';
 
 @Component({
   selector: 'app-list',
@@ -36,11 +36,15 @@ export class ListComponent implements OnInit {
     this.store.dispatch(new RemoveItemAction(args));
   }
 
-  public createItem(args) {
-    this.router.navigate(['new', args.id]);
+  public createItem(item: ListOfItems) {
+    this.router.navigate(['new', item.id]);
   }
 
-  public onLabelEdit(args) {
-    this.router.navigate(['editLabel', args.id]);
+  public onLabelEdit(item: ListOfItems) {
+    this.router.navigate(['editLabel', item.id]);
+  }
+
+  public onListRemove(item: ListOfItems) {
+    this.store.dispatch(new RemoveListAction(item));
   }
 }
