@@ -13,6 +13,7 @@ export class SubListComponent {
   @Output() public edit = new EventEmitter<any>();
   @Output() public create = new EventEmitter<any>();
   @Output() public labelEdit = new EventEmitter<any>();
+  @Output() public listCopy = new EventEmitter<any>();
   @Output() public listRemove = new EventEmitter<any>();
 
   onRemove(item: Item) {
@@ -32,6 +33,10 @@ export class SubListComponent {
 
   public onLabelEdit() {
     this.labelEdit.emit(this.items);
+  }
+
+  public onListCopy() {
+    this.listCopy.emit(this.items);
   }
 
   public onListRemove() {

@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { getLists, getIsLoading } from 'src/app/reducers/list.reducer';
-import { LoadAction, RemoveItemAction, RemoveListAction } from 'src/app/actions/list.actions';
+import { LoadAction, RemoveItemAction, RemoveListAction, CopyListAction } from 'src/app/actions/list.actions';
 import { Item, ListState, ListOfItems } from 'src/app/models/toDoitem';
 
 @Component({
@@ -42,6 +42,10 @@ export class ListComponent implements OnInit {
 
   public onLabelEdit(item: ListOfItems) {
     this.router.navigate(['editLabel', item.id]);
+  }
+
+  public onListCopy(item: ListOfItems) {
+    this.store.dispatch(new CopyListAction(item));
   }
 
   public onListRemove(item: ListOfItems) {

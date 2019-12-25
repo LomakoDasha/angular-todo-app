@@ -9,6 +9,7 @@ export enum ListActionTypes {
   CreateItem = '[List] Create item',
   EditItem = '[List] Edit item',
   EditLabel = '[List] Edit list label',
+  CopyList = '[List] Copy list',
   RemoveList = '[List] Remove list'
 }
 
@@ -51,6 +52,11 @@ export class EditLabelAction implements Action {
 
   constructor(public payload: ListOfItems) { }
 }
+export class CopyListAction implements Action {
+  public readonly type = ListActionTypes.CopyList;
+
+  constructor(public payload: ListOfItems) { }
+}
 
 export class RemoveListAction implements Action {
   public readonly type = ListActionTypes.RemoveList;
@@ -66,4 +72,5 @@ export type ListAction =
   | CreateItemAction
   | EditItemAction
   | EditLabelAction
+  | CopyListAction
   | RemoveListAction;

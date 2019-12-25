@@ -87,9 +87,19 @@ export function reducer(
       };
     }
 
+    case ListActionTypes.CopyList: {
+      const { payload } = action;
+      const copy = state.lists.slice(payload.id - 1, 1);
+
+      return {
+        ...state,
+        lists: [...state.lists].concat(payload)
+      };
+    }
+
     case ListActionTypes.RemoveList: {
       const { payload } = action;
-      state.lists.splice(payload.id-1, 1)
+      state.lists.splice(payload.id - 1, 1)
 
       return {
         ...state,
