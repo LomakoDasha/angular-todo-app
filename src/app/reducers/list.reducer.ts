@@ -89,11 +89,12 @@ export function reducer(
 
     case ListActionTypes.CopyList: {
       const { payload } = action;
-      const copy = state.lists.slice(payload.id - 1, 1);
+      const newItem = Object.assign({}, payload);
+      newItem.id = state.lists.length+1;
 
       return {
         ...state,
-        lists: [...state.lists].concat(payload)
+        lists: [...state.lists].concat(newItem)
       };
     }
 
