@@ -4,7 +4,9 @@ export interface ListState {
     listTitle: string,
     subList: Array<{
       id: number,
-      title: string
+      title: string,
+      description: string;
+      importanceFlag: boolean;
     }>
   }>;
   isLoading?: boolean;
@@ -15,7 +17,9 @@ export interface ListOfItems {
   listTitle: string,
   subList: Array<{
     id: number,
-    title: string
+    title: string,
+    description: string;
+    importanceFlag: boolean;
   }>
 }
 

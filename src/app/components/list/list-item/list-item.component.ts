@@ -8,8 +8,8 @@ import { Item } from 'src/app/models/toDoitem';
 })
 export class ListItemComponent {
   @Input() public item: Item;
-  @Output() public remove = new EventEmitter<any>();
-  @Output() public edit = new EventEmitter<any>();
+  @Output() public remove = new EventEmitter<Item>();
+  @Output() public edit = new EventEmitter<Item>();
 
   public onEdit() {
     this.edit.emit(this.item);

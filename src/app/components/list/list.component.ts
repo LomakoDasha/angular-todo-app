@@ -1,10 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { getLists, getIsLoading } from 'src/app/reducers/list.reducer';
-import { LoadAction, RemoveItemAction, RemoveListAction, CopyListAction } from 'src/app/actions/list.actions';
+import { LoadAction, RemoveItemAction, RemoveListAction, CopyListAction, AddNewListAction } from 'src/app/actions/list.actions';
 import { Item, ListState, ListOfItems } from 'src/app/models/toDoitem';
 
 @Component({
@@ -14,6 +14,7 @@ import { Item, ListState, ListOfItems } from 'src/app/models/toDoitem';
 })
 export class ListComponent implements OnInit {
   @Input() public searchText: string;
+  @Output() public addNewList = new EventEmitter<any>();
   public items$: Observable<any>;
   public isLoading$: Observable<boolean>;
 
@@ -50,5 +51,10 @@ export class ListComponent implements OnInit {
 
   public onListRemove(item: ListOfItems) {
     this.store.dispatch(new RemoveListAction(item));
+  }
+
+  public onAddNewList() {
+    this.addNewList.emit(this.items$)
+    this.store.dispatch(new AddNewListAction());
   }
 }

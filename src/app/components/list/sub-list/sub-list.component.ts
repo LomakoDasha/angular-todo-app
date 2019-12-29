@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Item } from 'src/app/models/toDoitem';
+import { Item, ListOfItems } from 'src/app/models/toDoitem';
 
 @Component({
   selector: 'app-sub-list',
@@ -7,7 +7,7 @@ import { Item } from 'src/app/models/toDoitem';
   styleUrls: ['./sub-list.component.scss']
 })
 export class SubListComponent {
-  @Input() public items: { id: number, listTitle: string, subList: Item };
+  @Input() public items: ListOfItems;
   @Input() public searchText: string;
   @Output() public remove = new EventEmitter<any>();
   @Output() public edit = new EventEmitter<any>();
