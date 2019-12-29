@@ -14,7 +14,11 @@
 
     &:hover {
       cursor: pointer;
-      background-color: rgb(151, 151, 194);
+      background-color: lighten(rgb(131, 132, 179), 10%);
+    }
+
+    &:focus {
+      outline: 0;
     }
 
     span {
