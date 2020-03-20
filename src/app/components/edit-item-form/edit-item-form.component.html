@@ -1,5 +1,5 @@
 <mat-card class="form-wrapper">
-  <h2 class="form-title">Here you can change the selected ToDo item</h2>
+  <h2 class="form-title">Here you can change selected ToDo item</h2>
   <form [formGroup]="itemForm" (submit)="itemForm.valid && submit()">
     <mat-form-field>
       <input matInput type="text" placeholder="title" formControlName="title">

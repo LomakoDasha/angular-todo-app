@@ -17,7 +17,7 @@ export class EditItemFormComponent implements OnInit {
 
   ngOnInit() {
     this.itemForm = this.fb.group({
-      id: [''],
+      id: ['', [Validators.required, this.isInteger]],
       title: ['', Validators.required],
       description: ['', Validators.required],
       importanceFlag: ['', Validators.required]

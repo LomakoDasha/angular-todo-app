@@ -10,14 +10,14 @@ import { Item } from 'src/app/models/toDoitem';
 })
 export class CreateItemFormComponent implements OnInit {
   public itemForm: FormGroup;
-  @Input() public item: Item;
+  @Input() public item: any;
   @Output() public save = new EventEmitter();
 
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
     this.itemForm = this.fb.group({
-      id: ['', [Validators.required, this.isInteger]],
+      id: [Math.trunc(Math.random()*100000), [Validators.required, this.isInteger]],
       title: ['', Validators.required],
       description: ['', Validators.required],
       importanceFlag: ['', Validators.required]

@@ -2,10 +2,6 @@
   <h2 class="form-title">Here you can create new ToDo item</h2>
   <form [formGroup]="itemForm" (submit)="itemForm.valid && submit()">
     <mat-form-field>
-      <input matInput type="number" placeholder="id" formControlName="id">
-    </mat-form-field>
-
-    <mat-form-field>
       <input matInput type="text" placeholder="title" formControlName="title">
     </mat-form-field>
 
