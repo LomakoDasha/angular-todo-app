@@ -24,7 +24,10 @@ export class SubListComponent {
   }
 
   onEdit(item: Item) {
-    this.edit.emit(item);
+    this.edit.emit({
+      list: this.items,
+      item
+    });
   }
 
   public onCreate() {

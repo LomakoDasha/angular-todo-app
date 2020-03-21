@@ -29,8 +29,9 @@ export class ListComponent implements OnInit {
     this.store.dispatch(new LoadAction());
   }
 
-  public editItem(item: Item) {
-    this.router.navigate(['edit', item.id]);
+  public editItem(args) {
+    const { list, item } = args;
+    this.router.navigate(['edit', list.id, item.id]);
   }
 
   public removeItem(args) {

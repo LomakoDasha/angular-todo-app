@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'list', pathMatch: 'full' },
   { path: 'list', component: TaskPageComponent },
   { path: 'new/:id', component: CreatePageComponent },
-  { path: 'edit/:id', component: EditPageComponent },
+  { path: 'edit/:list/:id', component: EditPageComponent },
   { path: 'editLabel/:id', component: EditLabelPageComponent },
   { path: '**', component: NotFoundPageComponent }
 ];

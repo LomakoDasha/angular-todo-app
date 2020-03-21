@@ -10,7 +10,7 @@ import { Item } from 'src/app/models/toDoitem';
 })
 export class CreateItemFormComponent implements OnInit {
   public itemForm: FormGroup;
-  @Input() public item: any;
+  @Input() public item: Item;
   @Output() public save = new EventEmitter();
 
   constructor(private fb: FormBuilder) { }

@@ -39,7 +39,7 @@ export class CreateItemAction implements Action {
 export class EditItemAction implements Action {
   public readonly type = ListActionTypes.EditItem;
 
-  constructor(public payload: Item) { }
+  constructor(public payload: Item, public route: number) { }
 }
 
 export class RemoveItemAction implements Action {

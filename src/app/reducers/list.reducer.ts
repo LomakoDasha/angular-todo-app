@@ -42,12 +42,12 @@ export function reducer(
     }
 
     case ListActionTypes.EditItem: {
-      const { payload } = action;
+      const { payload, route } = action;
 
       return {
         ...state,
         lists: state.lists.map(
-          (list) => list.subList.some((item) => item.id === payload.id)
+          (list) => list.subList.some((item) => list.id === route && item.id === payload.id)
             ? {
               ...list,
               subList: list.subList.map(
