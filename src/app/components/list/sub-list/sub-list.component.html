@@ -13,13 +13,18 @@
       </button>
     </div>
   </div>
-  <app-list-item
-    *ngFor="let item of items.subList | filter: searchText"
-    [item]=item
-    (edit)="onEdit($event)"
-    (remove)="onRemove($event)"
-  >
-  </app-list-item>
+
+  <div cdkDropList (cdkDropListDropped)="drop($event)">
+    <app-list-item
+      cdkDrag
+      *ngFor="let item of items.subList | filter: searchText"
+      [item]=item
+      (edit)="onEdit($event)"
+      (remove)="onRemove($event)"
+    >
+    </app-list-item>
+  </div>
+
   <button mat-button (click)="onCreate()" class="create-button">
     <mat-icon>add</mat-icon>
     <span>Create</span>
