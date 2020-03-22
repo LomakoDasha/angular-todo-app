@@ -1,7 +1,7 @@
 <div>
   <mat-toolbar>
     <mat-form-field>
-      <input matInput [(ngModel)]="searchText" placeholder="Write smth" />
+      <input matInput (keyup)="onSearch()" [(ngModel)]="searchText" placeholder="Write smth" />
     </mat-form-field>
     <button mat-raised-button (click)="onSearch()">Search</button>
   </mat-toolbar>
