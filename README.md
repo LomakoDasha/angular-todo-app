@@ -1,5 +1,12 @@
 # AngularTodoApp
 
+[link to the app](https://lomakodasha.github.io/angular-todo-app/)
+
+### UI Example:
+![AngularToDoApp](https://user-images.githubusercontent.com/42466442/77260438-19fc9080-6c99-11ea-8cdd-3ae3e24f1a6f.png)
+
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.18.
 
 ## Development server
