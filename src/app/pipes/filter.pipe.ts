@@ -7,8 +7,14 @@ import { Item } from '../models/toDoitem';
 export class FilterPipe implements PipeTransform {
 
   transform(value: Item[], criterion: string): Item[] {
+    let titleMatch, descriptionMatch;
+
     return criterion
-      ? value.filter((item: { title: string }) => item.title.toLowerCase().startsWith(criterion.toLowerCase()))
+      ? value.filter((item: { title: string, description: string }) => {
+        titleMatch = item.title.toLowerCase().match(criterion.toLowerCase());
+        descriptionMatch = item.description.toLowerCase().match(criterion.toLowerCase());
+        return (titleMatch !== null || descriptionMatch !== null) ? item : null
+      })
       : value;
   }
 
