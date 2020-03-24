@@ -1,7 +1,7 @@
 :host {
   display: flex;
 
-  button {
+  .list-button {
     width: 15vw;
     height: 6vh;
     margin: 5px;
@@ -24,6 +24,32 @@
     span {
       font-size: 17px;
       font-weight: 700;
+    }
+  }
+}
+
+@media (max-width: 1280px) {
+  :host {
+    .list-button {
+      height: 7vh;
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  :host {
+    .list-button {
+      width: 20vw;
+      height: 8vh;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  :host {
+    .list-button {
+      width: 30vw;
+      height: 10vh;
     }
   }
 }

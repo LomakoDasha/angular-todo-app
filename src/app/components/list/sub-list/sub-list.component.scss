@@ -40,7 +40,18 @@
   .button-wrapper {
     width: 50%;
     display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     visibility: hidden;
+  }
+
+  .label-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 20%;
   }
 }
 
@@ -54,5 +65,51 @@
 
 .create-button {
   width: 100%;
+  font-size: 1em;
 }
 
+@media (max-width: 1280px) {
+  .list-wrapper {
+    width: 20vw;
+
+    .title-label {
+      font-size: 1.3em;
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .list-wrapper {
+    width: 30vw;
+  }
+}
+
+@media (max-width: 800px) {
+  .list-wrapper {
+    width: 40vw;
+
+    .title-label {
+      font-size: 1.5em;
+    }
+  }
+
+  .create-button {
+    width: 100%;
+    font-size: 1.2em;
+  }
+}
+
+@media (max-width: 480px) {
+  .list-wrapper {
+    width: 70vw;
+
+    .title-label {
+      font-size: 1.7em;
+    }
+  }
+
+  .create-button {
+    width: 100%;
+    font-size: 1.3em;
+  }
+}

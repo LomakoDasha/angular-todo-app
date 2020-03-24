@@ -7,7 +7,7 @@ mat-card {
       animation: rattle 0.3s ease;
     }
 
-    h3 {
+    .item-title {
       display: flex;
       justify-content: space-between;
     }
@@ -17,7 +17,7 @@ mat-card {
   color: rgb(184, 17, 17);
 }
 
-button {
+.button {
   margin: 2px 5px;
 
     &:hover {
@@ -25,7 +25,7 @@ button {
     }
 }
 
-p {
+.item-description {
   height: 5vh;
   overflow: hidden;
 }
@@ -58,4 +58,46 @@ span {
 .button-wrapper {
   display: flex;
   justify-content: center;
+}
+
+@media (max-width: 1280px) {
+  .item-title {
+    font-size: 1.2em;
+  }
+
+  .item-description {
+    font-size: 1.1em;
+  }
+
+  .button {
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 800px) {
+  .item-title {
+    font-size: 1.4em;
+  }
+
+  .item-description {
+    font-size: 1.3em;
+  }
+
+  .button {
+    font-size: 1.2em;
+  }
+}
+
+@media (max-width: 480px) {
+  .item-title {
+    font-size: 1.6em;
+  }
+
+  .item-description {
+    font-size: 1.5em;
+  }
+
+  .button {
+    font-size: 1.3em;
+  }
 }
