@@ -1,4 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule, MatInputModule } from '@angular/material';
 
 import { LabelFormComponent } from './label-form.component';
 
@@ -8,9 +11,10 @@ describe('LabelFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LabelFormComponent ]
+      declarations: [LabelFormComponent],
+      imports: [ReactiveFormsModule, BrowserAnimationsModule, MatCardModule, MatInputModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
