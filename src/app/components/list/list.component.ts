@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 import { getLists, getIsLoading } from 'src/app/reducers/list.reducer';
 import { LoadAction, RemoveItemAction, RemoveListAction, CopyListAction, AddNewListAction } from 'src/app/actions/list.actions';
-import { Item, ListState, ListOfItems } from 'src/app/models/toDoitem';
+import { ListState, ListOfItems } from 'src/app/models/toDoitem';
 
 @Component({
   selector: 'app-list',
@@ -18,10 +18,9 @@ export class ListComponent implements OnInit {
   public items$: Observable<any>;
   public isLoading$: Observable<boolean>;
 
-  constructor(
-    private router: Router,
-    private store: Store<ListState>
-  ) { }
+  constructor(private router: Router,
+              private store: Store<ListState>) {
+  }
 
   public ngOnInit(): void {
     this.items$ = this.store.pipe(select(getLists));
@@ -30,7 +29,7 @@ export class ListComponent implements OnInit {
   }
 
   public editItem(args) {
-    const { list, item } = args;
+    const {list, item} = args;
     this.router.navigate(['edit', list.id, item.id]);
   }
 
@@ -55,7 +54,7 @@ export class ListComponent implements OnInit {
   }
 
   public onAddNewList() {
-    this.addNewList.emit(this.items$)
+    this.addNewList.emit(this.items$);
     this.store.dispatch(new AddNewListAction());
   }
 }

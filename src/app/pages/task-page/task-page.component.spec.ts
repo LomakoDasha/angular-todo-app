@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
-import { ListComponent } from '../../components/list/list.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { TaskPageComponent } from './task-page.component';
 
@@ -10,7 +9,8 @@ describe('TaskPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [TaskPageComponent, SearchBarComponent, ListComponent]
+      declarations: [TaskPageComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
       .compileComponents();
   }));
@@ -21,7 +21,7 @@ describe('TaskPageComponent', () => {
     fixture.detectChanges();
   });
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });
