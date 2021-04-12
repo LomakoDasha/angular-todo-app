@@ -1,5 +1,6 @@
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { Location } from '@angular/common';
 import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockStore } from '@ngrx/store/testing';
@@ -67,11 +68,21 @@ describe('ListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ListComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  describe('HTML template', () => {
+    beforeEach(() => {
+      fixture.detectChanges();
+    });
+
+    it('should create', () => {
+      expect(component).toBeTruthy();
+    });
+
+    it('should render "Add new list" button', () => {
+      const buttonElement = fixture.debugElement.query(By.css('button'));
+      expect(buttonElement.nativeElement.textContent).toContain('Add new list');
+    });
   });
 
   it('should have navigate to / before saveItem() call', () => {

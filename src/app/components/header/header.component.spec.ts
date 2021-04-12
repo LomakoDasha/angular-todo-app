@@ -25,13 +25,13 @@ describe('HeaderComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it(`should render <h1> element`, () => {
+  it('should render h1 tag', () => {
     const nativeElement: HTMLElement = fixture.nativeElement;
     const h1Element: HTMLElement = nativeElement.querySelector('.header__h1');
     expect(h1Element.textContent).toEqual('Angular ToDo app');
   });
 
-  it(`should render <h1> element with debug element`, () => {
+  it('should render h1 tag with debug element', () => {
     const debugElement: DebugElement = fixture.debugElement;
     const h1Element: DebugElement = debugElement.query(By.css('.header__h1'));
     const h1: HTMLElement = h1Element.nativeElement;

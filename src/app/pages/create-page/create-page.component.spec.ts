@@ -62,7 +62,7 @@ describe('CreatePageComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have navigate to / before saveItem() call', () => {
+  it('should navigate to / before saveItem() call', () => {
     const location = TestBed.get(Location);
     expect(location.path()).toBe('');
   });

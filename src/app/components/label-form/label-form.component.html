@@ -2,7 +2,8 @@
   <h2 class="form-title">Here you can change label of selected list</h2>
   <form [formGroup]="listForm" (submit)="listForm.valid && submit()">
     <mat-form-field>
-      <input matInput type="text" placeholder="listTitle" formControlName="listTitle">
+      <mat-label>Title of the list</mat-label>
+      <input matInput type="text" formControlName="listTitle">
     </mat-form-field>
 
     <button mat-raised-button color="primary" type="submit">Submit</button>

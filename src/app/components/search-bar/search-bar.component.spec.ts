@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule, MatToolbarModule } from '@angular/material';
 
 import { SearchBarComponent } from './search-bar.component';
+import { By } from '@angular/platform-browser';
 
 describe('SearchBarComponent', () => {
   let component: SearchBarComponent;
@@ -20,10 +21,25 @@ describe('SearchBarComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SearchBarComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  describe('HTML template', () => {
+    beforeEach(() => {
+      fixture.detectChanges();
+    });
+
+    it('should create', () => {
+      expect(component).toBeTruthy();
+    });
+
+    it('should render one input tag', () => {
+      const textareaElement = fixture.debugElement.queryAll(By.css('input'));
+      expect(textareaElement.length).toBe(1);
+    });
+
+    it('should render "Search" button', () => {
+      const buttonElement = fixture.debugElement.query(By.css('button'));
+      expect(buttonElement.nativeElement.textContent).toEqual('Search');
+    });
   });
 });
