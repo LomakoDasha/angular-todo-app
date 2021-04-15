@@ -10,6 +10,7 @@ import { EditItemFormComponent } from './edit-item-form.component';
 describe('EditItemFormComponent', () => {
   let component: EditItemFormComponent;
   let fixture: ComponentFixture<EditItemFormComponent>;
+  const item = {id: 11, title: 'Title', description: 'some text', importanceFlag: false};
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -22,6 +23,7 @@ describe('EditItemFormComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EditItemFormComponent);
     component = fixture.componentInstance;
+    component.item = item;
   });
 
   describe('HTML template', () => {
@@ -49,6 +51,11 @@ describe('EditItemFormComponent', () => {
     it('should render one form tag', () => {
       const formElement = fixture.debugElement.queryAll(By.css('form'));
       expect(formElement.length).toBe(1);
+    });
+
+    it('should render one input tag', () => {
+      const inputElement = fixture.debugElement.queryAll(By.css('.edit-item__input'));
+      expect(inputElement.length).toBe(1);
     });
 
     it('should render one textarea tag', () => {

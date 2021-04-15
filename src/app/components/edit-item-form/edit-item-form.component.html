@@ -3,7 +3,7 @@
   <form [formGroup]="itemForm" (submit)="itemForm.valid && submit()">
     <mat-form-field>
       <mat-label>Title</mat-label>
-      <input matInput type="text" formControlName="title">
+      <input matInput type="text" formControlName="title" class="edit-item__input">
     </mat-form-field>
 
     <mat-form-field>

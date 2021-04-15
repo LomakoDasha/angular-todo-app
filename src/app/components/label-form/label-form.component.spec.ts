@@ -10,6 +10,7 @@ import { LabelFormComponent } from './label-form.component';
 describe('LabelFormComponent', () => {
   let component: LabelFormComponent;
   let fixture: ComponentFixture<LabelFormComponent>;
+  const item = {id: 1, listTitle: 'List title', subList: [{id: 11, title: 'Title', description: 'some text', importanceFlag: false}]};
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -22,6 +23,7 @@ describe('LabelFormComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(LabelFormComponent);
     component = fixture.componentInstance;
+    component.item = item;
   });
 
   describe('HTML template', () => {

@@ -10,6 +10,7 @@ import { CreateItemFormComponent } from './create-item-form.component';
 describe('CreateItemFormComponent', () => {
   let component: CreateItemFormComponent;
   let fixture: ComponentFixture<CreateItemFormComponent>;
+  const item = {id: 11, title: 'Title', description: 'some text', importanceFlag: false};
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -22,6 +23,7 @@ describe('CreateItemFormComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CreateItemFormComponent);
     component = fixture.componentInstance;
+    component.item = item;
   });
 
   describe('HTML template', () => {
@@ -48,6 +50,11 @@ describe('CreateItemFormComponent', () => {
     it('should render one form tag', () => {
       const formElement = fixture.debugElement.queryAll(By.css('form'));
       expect(formElement.length).toBe(1);
+    });
+
+    it('should render one input tag', () => {
+      const inputElement = fixture.debugElement.queryAll(By.css('.create-item__input'));
+      expect(inputElement.length).toBe(1);
     });
 
     it('should render one textarea tag', () => {
