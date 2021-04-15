@@ -1,12 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Item } from '../models/toDoitem';
+import { IItem } from '../models/item';
 
 @Pipe({
   name: 'filter'
 })
 export class FilterPipe implements PipeTransform {
 
-  transform(value: Item[], criterion: string): Item[] {
+  transform(value: IItem[], criterion: string): IItem[] {
     let titleMatch: any;
     let descriptionMatch: any;
 

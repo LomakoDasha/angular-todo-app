@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Item, ListOfItems } from 'src/app/models/toDoitem';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { IListOfItems } from '../../../models/listOfItems';
+import { IItem } from '../../../models/item';
 
 @Component({
   selector: 'app-sub-list',
@@ -8,7 +9,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
   styleUrls: ['./sub-list.component.scss']
 })
 export class SubListComponent {
-  @Input() public items: ListOfItems;
+  @Input() public items: IListOfItems;
   @Input() public searchText: string;
   @Output() public remove = new EventEmitter<any>();
   @Output() public edit = new EventEmitter<any>();
@@ -17,14 +18,14 @@ export class SubListComponent {
   @Output() public listCopy = new EventEmitter<any>();
   @Output() public listRemove = new EventEmitter<any>();
 
-  public onRemove(item: Item) {
+  public onRemove(item: IItem) {
     this.remove.emit({
       list: this.items,
       item
     });
   }
 
-  public onEdit(item: Item) {
+  public onEdit(item: IItem) {
     this.edit.emit({
       list: this.items,
       item

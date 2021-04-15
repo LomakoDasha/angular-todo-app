@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
-import { ListOfItems, Item } from '../models/toDoitem';
+import { IListOfItems } from '../models/listOfItems';
+import { IItem } from '../models/item';
 
 export enum ListActionTypes {
   Load = '[List] Load',
@@ -33,13 +34,13 @@ export class LoadFailedAction implements Action {
 export class CreateItemAction implements Action {
   public readonly type = ListActionTypes.CreateItem;
 
-  constructor(public payload: Item, public route: number) { }
+  constructor(public payload: IItem, public route: number) { }
 }
 
 export class EditItemAction implements Action {
   public readonly type = ListActionTypes.EditItem;
 
-  constructor(public payload: Item, public route: number) { }
+  constructor(public payload: IItem, public route: number) { }
 }
 
 export class RemoveItemAction implements Action {
@@ -51,18 +52,18 @@ export class RemoveItemAction implements Action {
 export class EditLabelAction implements Action {
   public readonly type = ListActionTypes.EditLabel;
 
-  constructor(public payload: ListOfItems) { }
+  constructor(public payload: IListOfItems) { }
 }
 export class CopyListAction implements Action {
   public readonly type = ListActionTypes.CopyList;
 
-  constructor(public payload: ListOfItems) { }
+  constructor(public payload: IListOfItems) { }
 }
 
 export class RemoveListAction implements Action {
   public readonly type = ListActionTypes.RemoveList;
 
-  constructor(public payload: ListOfItems) { }
+  constructor(public payload: IListOfItems) { }
 }
 
 export class AddNewListAction implements Action {

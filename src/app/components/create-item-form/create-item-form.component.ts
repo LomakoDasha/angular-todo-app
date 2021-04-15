@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
-
-import { Item } from 'src/app/models/toDoitem';
+import { IItem } from '../../models/item';
 
 @Component({
   selector: 'app-create-item-form',
@@ -10,7 +9,7 @@ import { Item } from 'src/app/models/toDoitem';
 })
 export class CreateItemFormComponent implements OnInit {
   public itemForm: FormGroup;
-  @Input() public item: Item;
+  @Input() public item: IItem;
   @Output() public save = new EventEmitter();
 
   constructor(private fb: FormBuilder) {

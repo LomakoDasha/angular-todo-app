@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-
 import { getItemById } from 'src/app/reducers/list.reducer';
 import { EditItemAction } from 'src/app/actions/list.actions';
-import { Item, ListState } from 'src/app/models/toDoitem';
+import { IListState } from '../../models/listState';
+import { IItem } from '../../models/item';
 
 @Component({
   selector: 'app-edit-page',
@@ -13,12 +13,13 @@ import { Item, ListState } from 'src/app/models/toDoitem';
 })
 export class EditPageComponent {
   public item$ = this.store.pipe(
-    select(getItemById, { id: Number(this.route.snapshot.params.id) })
+    select(getItemById, {id: Number(this.route.snapshot.params.id)})
   );
 
-  constructor(private route: ActivatedRoute, private store: Store<ListState>, private router: Router) { }
+  constructor(private route: ActivatedRoute, private store: Store<IListState>, private router: Router) {
+  }
 
-  public editItem(item: Item) {
+  public editItem(item: IItem) {
     this.store.dispatch(new EditItemAction(item, Number(this.route.snapshot.params.list)));
     this.router.navigate(['/list']);
   }

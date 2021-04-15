@@ -2,13 +2,13 @@
   <div class="label-wrapper">
     <h2 class="title-label">{{ items.listTitle | uppercase }}</h2>
     <div class="button-wrapper">
-      <button class="label-button" (click)="onLabelEdit()">
+      <button class="label-button" matTooltip="Edit label of the list" matTooltipPosition="above" (click)="onLabelEdit()">
         <mat-icon>edit</mat-icon>
       </button>
-      <button class="label-button" (click)="onListCopy()">
+      <button class="label-button" matTooltip="Duplicate list" matTooltipPosition="above" (click)="onListCopy()">
         <mat-icon>file_copy</mat-icon>
       </button>
-      <button class="label-button" (click)="onListRemove()">
+      <button class="label-button" matTooltip="Delete list" matTooltipPosition="above" (click)="onListRemove()">
         <mat-icon>delete</mat-icon>
       </button>
     </div>

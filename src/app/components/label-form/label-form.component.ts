@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
-import { ListOfItems } from 'src/app/models/toDoitem';
+import { IListOfItems } from '../../models/listOfItems';
 
 @Component({
   selector: 'app-label-form',
@@ -10,10 +9,11 @@ import { ListOfItems } from 'src/app/models/toDoitem';
 })
 export class LabelFormComponent implements OnInit {
   public listForm: FormGroup;
-  @Input() public item: ListOfItems;
+  @Input() public item: IListOfItems;
   @Output() public save = new EventEmitter();
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {
+  }
 
   ngOnInit() {
     this.listForm = this.fb.group({
