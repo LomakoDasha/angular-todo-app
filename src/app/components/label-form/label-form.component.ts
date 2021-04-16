@@ -10,7 +10,7 @@ import { IListOfItems } from '../../models/listOfItems';
 export class LabelFormComponent implements OnInit {
   public listForm: FormGroup;
   @Input() public item: IListOfItems;
-  @Output() public save = new EventEmitter();
+  @Output() public save = new EventEmitter<IListOfItems>();
 
   constructor(private fb: FormBuilder) {
   }

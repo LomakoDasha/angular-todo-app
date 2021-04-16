@@ -7,9 +7,24 @@ import { provideMockStore } from '@ngrx/store/testing';
 
 import { ListComponent } from './list.component';
 
+@Component({
+  template: `
+    <app-list [searchText]="searchText" (addNewList)="onAddNewList()">
+    </app-list>
+  `
+})
+class TestListComponent {
+  public searchText = 'some text';
+  public newItem: any;
+
+  public onAddNewList() {
+    this.newItem = 'info';
+  }
+}
+
 describe('ListComponent', () => {
-  let component: ListComponent;
-  let fixture: ComponentFixture<ListComponent>;
+  let testComponent: TestListComponent;
+  let fixture: ComponentFixture<TestListComponent>;
   const initialState = {
     tasks: {
       id: 1,
@@ -46,6 +61,7 @@ describe('ListComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         ListComponent,
+        TestListComponent,
         DummyComponent1,
         DummyComponent2,
         DummyComponent3
@@ -66,8 +82,8 @@ describe('ListComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListComponent);
-    component = fixture.componentInstance;
+    fixture = TestBed.createComponent(TestListComponent);
+    testComponent = fixture.componentInstance;
   });
 
   describe('HTML template', () => {
@@ -76,12 +92,28 @@ describe('ListComponent', () => {
     });
 
     it('should create', () => {
-      expect(component).toBeTruthy();
+      expect(testComponent).toBeTruthy();
     });
 
     it('should render "Add new list" button', () => {
       const buttonElement = fixture.debugElement.query(By.css('button'));
       expect(buttonElement.nativeElement.textContent).toContain('Add new list');
+    });
+  });
+
+  describe('test @Input and @Output', () => {
+    beforeEach(() => {
+      fixture.detectChanges();
+    });
+
+    it('should display @Input info correctly', () => {
+      expect(testComponent.searchText).toEqual('some text');
+    });
+
+    it('should trigger save event on form tag', () => {
+      const buttonElement = fixture.debugElement.query(By.css('.list-button'));
+      buttonElement.triggerEventHandler('click', null);
+      expect(testComponent.newItem).toEqual('info');
     });
   });
 

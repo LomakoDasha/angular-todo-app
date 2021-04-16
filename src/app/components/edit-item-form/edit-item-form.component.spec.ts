@@ -1,29 +1,43 @@
-import { DebugElement } from '@angular/core';
+import { Component, DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule, MatInputModule, MatRadioModule } from '@angular/material';
+import { IItem } from '../../models/item';
 
 import { EditItemFormComponent } from './edit-item-form.component';
 
+@Component({
+  template: `
+    <app-edit-item-form [item]="item" (save)="submit($event)">
+    </app-edit-item-form>
+  `
+})
+class TestEditItemFormComponent {
+  public item: IItem = {id: 11, title: 'Title', description: 'some text', importanceFlag: false};
+  public savedItem: IItem;
+
+  public submit(value: IItem) {
+    this.savedItem = value;
+  }
+}
+
 describe('EditItemFormComponent', () => {
-  let component: EditItemFormComponent;
-  let fixture: ComponentFixture<EditItemFormComponent>;
-  const item = {id: 11, title: 'Title', description: 'some text', importanceFlag: false};
+  let testComponent: TestEditItemFormComponent;
+  let fixture: ComponentFixture<TestEditItemFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [EditItemFormComponent],
+      declarations: [EditItemFormComponent, TestEditItemFormComponent],
       imports: [ReactiveFormsModule, BrowserAnimationsModule, MatCardModule, MatInputModule, MatRadioModule]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditItemFormComponent);
-    component = fixture.componentInstance;
-    component.item = item;
+    fixture = TestBed.createComponent(TestEditItemFormComponent);
+    testComponent = fixture.componentInstance;
   });
 
   describe('HTML template', () => {
@@ -32,7 +46,7 @@ describe('EditItemFormComponent', () => {
     });
 
     it('should create', () => {
-      expect(component).toBeTruthy();
+      expect(testComponent).toBeTruthy();
     });
 
     it('should render h2 tag', () => {
@@ -81,6 +95,18 @@ describe('EditItemFormComponent', () => {
     it('should render "Submit" button', () => {
       const buttonElement = fixture.debugElement.query(By.css('button'));
       expect(buttonElement.nativeElement.textContent).toEqual('Submit');
+    });
+  });
+
+  describe('test @Input and @Output', () => {
+    beforeEach(() => {
+      fixture.detectChanges();
+    });
+
+    it('should trigger save event on form tag', () => {
+      const formElement = fixture.debugElement.query(By.css('form'));
+      formElement.triggerEventHandler('submit', null);
+      expect(testComponent.savedItem).toEqual(testComponent.item);
     });
   });
 });

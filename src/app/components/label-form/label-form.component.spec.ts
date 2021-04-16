@@ -1,29 +1,47 @@
-import { DebugElement } from '@angular/core';
+import { Component, DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule, MatInputModule } from '@angular/material';
+import { IListOfItems } from '../../models/listOfItems';
 
 import { LabelFormComponent } from './label-form.component';
 
+@Component({
+  template: `
+    <app-label-form [item]="item" (save)="submit($event)">
+    </app-label-form>
+  `
+})
+class TestLabelFormComponent {
+  public item: IListOfItems = {
+    id: 1,
+    listTitle: 'List title',
+    subList: [{id: 11, title: 'Title', description: 'some text', importanceFlag: false}]
+  };
+  public savedItem: IListOfItems;
+
+  public submit(value: IListOfItems) {
+    this.savedItem = value;
+  }
+}
+
 describe('LabelFormComponent', () => {
-  let component: LabelFormComponent;
-  let fixture: ComponentFixture<LabelFormComponent>;
-  const item = {id: 1, listTitle: 'List title', subList: [{id: 11, title: 'Title', description: 'some text', importanceFlag: false}]};
+  let testComponent: TestLabelFormComponent;
+  let fixture: ComponentFixture<TestLabelFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [LabelFormComponent],
+      declarations: [LabelFormComponent, TestLabelFormComponent],
       imports: [ReactiveFormsModule, BrowserAnimationsModule, MatCardModule, MatInputModule]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LabelFormComponent);
-    component = fixture.componentInstance;
-    component.item = item;
+    fixture = TestBed.createComponent(TestLabelFormComponent);
+    testComponent = fixture.componentInstance;
   });
 
   describe('HTML template', () => {
@@ -32,7 +50,7 @@ describe('LabelFormComponent', () => {
     });
 
     it('should create', () => {
-      expect(component).toBeTruthy();
+      expect(testComponent).toBeTruthy();
     });
 
     it('should render h2 tag', () => {
@@ -61,6 +79,18 @@ describe('LabelFormComponent', () => {
     it('should render "Submit" button', () => {
       const buttonElement = fixture.debugElement.query(By.css('button'));
       expect(buttonElement.nativeElement.textContent).toEqual('Submit');
+    });
+  });
+
+  describe('test @Input and @Output', () => {
+    beforeEach(() => {
+      fixture.detectChanges();
+    });
+
+    it('should trigger save event on form tag', () => {
+      const formElement = fixture.debugElement.query(By.css('form'));
+      formElement.triggerEventHandler('submit', null);
+      expect(testComponent.savedItem).toEqual(testComponent.item);
     });
   });
 });

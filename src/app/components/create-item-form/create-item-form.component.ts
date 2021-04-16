@@ -10,7 +10,7 @@ import { IItem } from '../../models/item';
 export class CreateItemFormComponent implements OnInit {
   public itemForm: FormGroup;
   @Input() public item: IItem;
-  @Output() public save = new EventEmitter();
+  @Output() public save = new EventEmitter<IItem>();
 
   constructor(private fb: FormBuilder) {
   }
