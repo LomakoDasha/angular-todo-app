@@ -20,7 +20,7 @@ export class CreateItemFormComponent implements OnInit {
       id: [Math.trunc(Math.random() * 100000), [Validators.required, this.isInteger]],
       title: ['', Validators.required],
       description: ['', Validators.required],
-      importanceFlag: ['', Validators.required]
+      importanceFlag: [null, Validators.required]
     });
 
     if (this.item) {
@@ -33,11 +33,6 @@ export class CreateItemFormComponent implements OnInit {
   }
 
   public submit() {
-    if (this.itemForm.value.importanceFlag === 'true') {
-      this.itemForm.value.importanceFlag = true;
-    } else {
-      this.itemForm.value.importanceFlag = false;
-    }
     this.save.emit(this.itemForm.value);
   }
 }

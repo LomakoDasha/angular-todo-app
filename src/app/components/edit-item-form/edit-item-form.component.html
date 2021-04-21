@@ -13,8 +13,8 @@
 
     <label>Is it important or urgent task ?</label>
     <mat-radio-group class="form-radio-group" formControlName="importanceFlag">
-      <mat-radio-button class="form-radio-button" value=true>Yes</mat-radio-button>
-      <mat-radio-button class="form-radio-button" value=false>No</mat-radio-button>
+      <mat-radio-button class="form-radio-button" [value]="true"> Yes</mat-radio-button>
+      <mat-radio-button class="form-radio-button" [value]="false"> No</mat-radio-button>
     </mat-radio-group>
     <button mat-raised-button color="primary" type="submit">Submit</button>
   </form>

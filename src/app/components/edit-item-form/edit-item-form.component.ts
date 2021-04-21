@@ -12,14 +12,15 @@ export class EditItemFormComponent implements OnInit {
   @Input() public item: IItem;
   @Output() public save = new EventEmitter<IItem>();
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {
+  }
 
   ngOnInit() {
     this.itemForm = this.fb.group({
       id: ['', [Validators.required, this.isInteger]],
       title: ['', Validators.required],
       description: ['', Validators.required],
-      importanceFlag: ['', Validators.required]
+      importanceFlag: [null, Validators.required]
     });
 
     if (this.item) {
@@ -28,15 +29,10 @@ export class EditItemFormComponent implements OnInit {
   }
 
   public isInteger(control: AbstractControl) {
-    return Number.isInteger(+control.value) ? null : { noInteger: { value: control.value } };
+    return Number.isInteger(+control.value) ? null : {noInteger: {value: control.value}};
   }
 
   public submit() {
-    if (this.itemForm.value.importanceFlag === 'true') {
-      this.itemForm.value.importanceFlag = true;
-    } else {
-      this.itemForm.value.importanceFlag = false;
-    }
     this.save.emit(this.itemForm.value);
   }
 }

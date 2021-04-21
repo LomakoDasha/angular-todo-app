@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 import { Location } from '@angular/common';
 import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockStore } from '@ngrx/store/testing';
+import { Router } from '@angular/router';
 
 import { ListComponent } from './list.component';
 
@@ -23,10 +24,38 @@ class TestListComponent {
 }
 
 describe('ListComponent', () => {
+  let component: ListComponent;
   let testComponent: TestListComponent;
-  let fixture: ComponentFixture<TestListComponent>;
+  let fixture: ComponentFixture<ListComponent>;
+  let fixtureTest: ComponentFixture<TestListComponent>;
+  const routerSpy = {navigate: jasmine.createSpy('navigate')};
   const initialState = {
     tasks: {
+      id: 1,
+      listTitle: 'Label1',
+      subList: [
+        {
+          id: 11,
+          title: 'Title1',
+          description: 'sometext11',
+          importanceFlag: false
+        }, {
+          id: 12,
+          title: 'Title2',
+          description: 'sometext12',
+          importanceFlag: true
+        },
+      ]
+    }
+  };
+  const testItem = {
+    item: {
+      id: 11,
+      title: 'Title1',
+      description: 'sometext11',
+      importanceFlag: false
+    },
+    list: {
       id: 1,
       listTitle: 'Label1',
       subList: [
@@ -75,20 +104,23 @@ describe('ListComponent', () => {
           ]
         )
       ],
-      providers: [provideMockStore({initialState})],
+      providers: [
+        provideMockStore({initialState}),
+        {provide: Router, useValue: routerSpy}
+      ],
       schemas: [NO_ERRORS_SCHEMA]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestListComponent);
-    testComponent = fixture.componentInstance;
+    fixtureTest = TestBed.createComponent(TestListComponent);
+    testComponent = fixtureTest.componentInstance;
   });
 
   describe('HTML template', () => {
     beforeEach(() => {
-      fixture.detectChanges();
+      fixtureTest.detectChanges();
     });
 
     it('should create', () => {
@@ -96,14 +128,14 @@ describe('ListComponent', () => {
     });
 
     it('should render "Add new list" button', () => {
-      const buttonElement = fixture.debugElement.query(By.css('button'));
+      const buttonElement = fixtureTest.debugElement.query(By.css('button'));
       expect(buttonElement.nativeElement.textContent).toContain('Add new list');
     });
   });
 
   describe('test @Input and @Output', () => {
     beforeEach(() => {
-      fixture.detectChanges();
+      fixtureTest.detectChanges();
     });
 
     it('should display @Input info correctly', () => {
@@ -111,14 +143,37 @@ describe('ListComponent', () => {
     });
 
     it('should trigger save event on form tag', () => {
-      const buttonElement = fixture.debugElement.query(By.css('.list-button'));
+      const buttonElement = fixtureTest.debugElement.query(By.css('.list-button'));
       buttonElement.triggerEventHandler('click', null);
       expect(testComponent.newItem).toEqual('info');
     });
   });
 
-  it('should have navigate to / before saveItem() call', () => {
-    const location = TestBed.get(Location);
-    expect(location.path()).toBe('');
+  describe('Check routing work', () => {
+    beforeEach(() => {
+      fixture = TestBed.createComponent(ListComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    });
+
+    it('should navigate to / before saveItem() call', () => {
+      const location = TestBed.get(Location);
+      expect(location.path()).toBe('');
+    });
+
+    it('should navigate to /edit on editItem() call', () => {
+      component.editItem(testItem);
+      expect(routerSpy.navigate).toHaveBeenCalledWith(['edit', testItem.list.id, testItem.item.id]);
+    });
+
+    it('should navigate to /new on createItem() call', () => {
+      component.createItem(initialState.tasks);
+      expect(routerSpy.navigate).toHaveBeenCalledWith(['new', initialState.tasks.id]);
+    });
+
+    it('should navigate to /editLabel on onLabelEdit() call', () => {
+      component.onLabelEdit(initialState.tasks);
+      expect(routerSpy.navigate).toHaveBeenCalledWith(['editLabel', initialState.tasks.id]);
+    });
   });
 });

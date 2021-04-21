@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Location } from '@angular/common';
 import { DebugElement } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
 import { By } from '@angular/platform-browser';
 
 import { NotFoundPageComponent } from './not-found-page.component';
@@ -10,7 +12,10 @@ describe('NotFoundPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NotFoundPageComponent]
+      declarations: [NotFoundPageComponent],
+      imports: [
+        RouterTestingModule.withRoutes([])
+      ],
     })
       .compileComponents();
   }));
@@ -48,6 +53,24 @@ describe('NotFoundPageComponent', () => {
       const linkElement: DebugElement = debugElement.query(By.css('a'));
       const link: HTMLElement = linkElement.nativeElement;
       expect(link.textContent).toEqual('Go to the main page');
+    });
+  });
+
+  describe('Check routing work', () => {
+    beforeEach(() => {
+      fixture.detectChanges();
+    });
+
+    it('should navigate to / on link click', () => {
+      const location = TestBed.get(Location);
+      const linkElement = fixture.debugElement.query(By.css('a'));
+      const nativeLink = linkElement.nativeElement;
+      nativeLink.click();
+      fixture.detectChanges();
+      fixture.whenStable()
+        .then(() => {
+          expect(location.path()).toBe('/');
+        });
     });
   });
 });

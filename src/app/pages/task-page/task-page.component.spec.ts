@@ -6,6 +6,7 @@ import { TaskPageComponent } from './task-page.component';
 describe('TaskPageComponent', () => {
   let component: TaskPageComponent;
   let fixture: ComponentFixture<TaskPageComponent>;
+  const searchText = '';
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -18,10 +19,16 @@ describe('TaskPageComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TaskPageComponent);
     component = fixture.componentInstance;
+    component.searchText = searchText;
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('onSearch() call', () => {
+    component.onSearch('some text');
+    expect(component.searchText).toBe('some text');
   });
 });

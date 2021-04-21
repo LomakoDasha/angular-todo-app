@@ -1,14 +1,20 @@
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Location } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockStore } from '@ngrx/store/testing';
 
 import { CreatePageComponent } from './create-page.component';
 
+@Component({template: ''})
+class DummyComponent {
+}
+
 describe('CreatePageComponent', () => {
   let component: CreatePageComponent;
   let fixture: ComponentFixture<CreatePageComponent>;
+  const routerSpy = {navigate: jasmine.createSpy('navigate')};
   const initialState = {
     tasks: {
       id: 1,
@@ -29,10 +35,6 @@ describe('CreatePageComponent', () => {
     }
   };
 
-  @Component({template: ''})
-  class DummyComponent {
-  }
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
@@ -46,7 +48,16 @@ describe('CreatePageComponent', () => {
           ]
         )
       ],
-      providers: [provideMockStore({initialState})],
+      providers: [
+        provideMockStore({initialState}),
+        {provide: Router, useValue: routerSpy},
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {params: {id: '26546854168478'}}
+          }
+        }
+      ],
       schemas: [NO_ERRORS_SCHEMA]
     })
       .compileComponents();
@@ -62,8 +73,20 @@ describe('CreatePageComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should navigate to / before saveItem() call', () => {
-    const location = TestBed.get(Location);
-    expect(location.path()).toBe('');
+  describe('Check routing work', () => {
+    beforeEach(() => {
+      fixture.detectChanges();
+    });
+
+    it('should navigate to / before saveItem() call', () => {
+      const location = TestBed.get(Location);
+      expect(location.path()).toBe('');
+    });
+
+    it('should navigate to /list on saveItem() call', () => {
+      component.saveItem(initialState.tasks.subList[0]);
+      fixture.detectChanges();
+      expect(routerSpy.navigate).toHaveBeenCalledWith(['/list']);
+    });
   });
 });
