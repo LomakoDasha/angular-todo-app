@@ -54,6 +54,7 @@ export class EditLabelAction implements Action {
 
   constructor(public payload: IListOfItems) { }
 }
+
 export class CopyListAction implements Action {
   public readonly type = ListActionTypes.CopyList;
 
@@ -68,7 +69,6 @@ export class RemoveListAction implements Action {
 
 export class AddNewListAction implements Action {
   public readonly type = ListActionTypes.AddNewList;
-
 }
 
 export type ListAction =
