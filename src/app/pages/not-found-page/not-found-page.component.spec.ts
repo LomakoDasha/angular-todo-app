@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Location } from '@angular/common';
-import { DebugElement } from '@angular/core';
+import { DebugElement, DebugNode } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { By } from '@angular/platform-browser';
 
@@ -56,14 +56,14 @@ describe('NotFoundPageComponent', () => {
     });
   });
 
-  describe('Check routing work', () => {
+  describe('Navigation', () => {
     beforeEach(() => {
       fixture.detectChanges();
     });
 
     it('should navigate to / on link click', () => {
       const location = TestBed.get(Location);
-      const linkElement = fixture.debugElement.query(By.css('a'));
+      const linkElement: DebugElement = fixture.debugElement.query(By.css('a'));
       const nativeLink = linkElement.nativeElement;
       nativeLink.click();
       fixture.detectChanges();

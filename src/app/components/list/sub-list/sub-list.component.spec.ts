@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { MatCardModule, MatIconModule } from '@angular/material';
@@ -88,73 +88,73 @@ describe('SubListComponent', () => {
     });
 
     it('should render three buttons in the label of list', () => {
-      const buttonsElement = fixture.debugElement.queryAll(By.css('.label-button'));
+      const buttonsElement: DebugElement[] = fixture.debugElement.queryAll(By.css('.label-button'));
       expect(buttonsElement.length).toBe(3);
     });
 
     it('should render first button with "edit" value', () => {
-      const buttonsElement = fixture.debugElement.queryAll(By.css('button'));
+      const buttonsElement: DebugElement[] = fixture.debugElement.queryAll(By.css('button'));
       expect(buttonsElement[0].nativeElement.textContent).toContain('edit');
     });
 
     it('should render second button with "file_copy" value', () => {
-      const buttonsElement = fixture.debugElement.queryAll(By.css('button'));
+      const buttonsElement: DebugElement[] = fixture.debugElement.queryAll(By.css('button'));
       expect(buttonsElement[1].nativeElement.textContent).toContain('file_copy');
     });
 
     it('should render third button with "delete" value', () => {
-      const buttonsElement = fixture.debugElement.queryAll(By.css('button'));
+      const buttonsElement: DebugElement[] = fixture.debugElement.queryAll(By.css('button'));
       expect(buttonsElement[2].nativeElement.textContent).toContain('delete');
     });
 
     it('should render "Create" button', () => {
-      const buttonElement = fixture.debugElement.query(By.css('.create-button'));
+      const buttonElement: DebugElement = fixture.debugElement.query(By.css('.create-button'));
       expect(buttonElement.nativeElement.textContent).toContain('Create');
     });
   });
 
-  describe('test @Input and @Output', () => {
+  describe('@Input and @Output', () => {
     beforeEach(() => {
       fixture.detectChanges();
     });
 
     it('should contain appropriate listTitle in h2 tag', () => {
-      const h2Element = fixture.debugElement.query(By.css('.title-label'));
+      const h2Element: DebugElement = fixture.debugElement.query(By.css('.title-label'));
       expect(h2Element.nativeElement.textContent).toContain(testComponent.item.listTitle.toUpperCase());
     });
 
     it('should trigger edit event on app-list-item tag', () => {
-      const element = fixture.debugElement.query(By.css('app-list-item'));
+      const element: DebugElement = fixture.debugElement.query(By.css('app-list-item'));
       element.triggerEventHandler('edit', null);
       expect(testComponent.editItem).toEqual('Edit item');
     });
 
     it('should trigger remove event on app-list-item tag', () => {
-      const element = fixture.debugElement.query(By.css('app-list-item'));
+      const element: DebugElement = fixture.debugElement.query(By.css('app-list-item'));
       element.triggerEventHandler('remove', null);
       expect(testComponent.removeItem).toEqual('Remove item');
     });
 
     it('should trigger click event on "Edit label of the list" button', () => {
-      const buttonElement = fixture.debugElement.query(By.css('.label-edit-btn'));
+      const buttonElement: DebugElement = fixture.debugElement.query(By.css('.label-edit-btn'));
       buttonElement.triggerEventHandler('click', null);
       expect(testComponent.labelEditItem).toEqual('Edit label');
     });
 
     it('should trigger click event on "Duplicate list" button', () => {
-      const buttonElement = fixture.debugElement.query(By.css('.list-copy-btn'));
+      const buttonElement: DebugElement = fixture.debugElement.query(By.css('.list-copy-btn'));
       buttonElement.triggerEventHandler('click', null);
       expect(testComponent.listCopyItem).toEqual('Copy list');
     });
 
     it('should trigger click event on "Delete list" button', () => {
-      const buttonElement = fixture.debugElement.query(By.css('.list-remove-btn'));
+      const buttonElement: DebugElement = fixture.debugElement.query(By.css('.list-remove-btn'));
       buttonElement.triggerEventHandler('click', null);
       expect(testComponent.listRemoveItem).toEqual('Delete list');
     });
 
     it('should trigger click event on "Create" button', () => {
-      const buttonElement = fixture.debugElement.query(By.css('.create-button'));
+      const buttonElement: DebugElement = fixture.debugElement.query(By.css('.create-button'));
       buttonElement.triggerEventHandler('click', null);
       expect(testComponent.createItem).toEqual('Create item');
     });

@@ -76,7 +76,7 @@ describe('EditLabelPageComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('Check routing work', () => {
+  describe('Navigation', () => {
     beforeEach(() => {
       fixture.detectChanges();
     });

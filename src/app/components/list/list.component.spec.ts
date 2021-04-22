@@ -1,4 +1,4 @@
-import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
+import { Component, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Location } from '@angular/common';
@@ -27,7 +27,7 @@ describe('ListComponent', () => {
   let component: ListComponent;
   let testComponent: TestListComponent;
   let fixture: ComponentFixture<ListComponent>;
-  let fixtureTest: ComponentFixture<TestListComponent>;
+  let testFixture: ComponentFixture<TestListComponent>;
   const routerSpy = {navigate: jasmine.createSpy('navigate')};
   const initialState = {
     tasks: {
@@ -114,13 +114,13 @@ describe('ListComponent', () => {
   }));
 
   beforeEach(() => {
-    fixtureTest = TestBed.createComponent(TestListComponent);
-    testComponent = fixtureTest.componentInstance;
+    testFixture = TestBed.createComponent(TestListComponent);
+    testComponent = testFixture.componentInstance;
   });
 
   describe('HTML template', () => {
     beforeEach(() => {
-      fixtureTest.detectChanges();
+      testFixture.detectChanges();
     });
 
     it('should create', () => {
@@ -128,14 +128,14 @@ describe('ListComponent', () => {
     });
 
     it('should render "Add new list" button', () => {
-      const buttonElement = fixtureTest.debugElement.query(By.css('button'));
+      const buttonElement: DebugElement = testFixture.debugElement.query(By.css('button'));
       expect(buttonElement.nativeElement.textContent).toContain('Add new list');
     });
   });
 
-  describe('test @Input and @Output', () => {
+  describe('@Input and @Output', () => {
     beforeEach(() => {
-      fixtureTest.detectChanges();
+      testFixture.detectChanges();
     });
 
     it('should display @Input info correctly', () => {
@@ -143,13 +143,13 @@ describe('ListComponent', () => {
     });
 
     it('should trigger save event on form tag', () => {
-      const buttonElement = fixtureTest.debugElement.query(By.css('.list-button'));
+      const buttonElement: DebugElement = testFixture.debugElement.query(By.css('.list-button'));
       buttonElement.triggerEventHandler('click', null);
       expect(testComponent.newItem).toEqual('info');
     });
   });
 
-  describe('Check routing work', () => {
+  describe('Navigation', () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(ListComponent);
       component = fixture.componentInstance;
@@ -174,6 +174,19 @@ describe('ListComponent', () => {
     it('should navigate to /editLabel on onLabelEdit() call', () => {
       component.onLabelEdit(initialState.tasks);
       expect(routerSpy.navigate).toHaveBeenCalledWith(['editLabel', initialState.tasks.id]);
+    });
+  });
+
+  describe('Lifecycle hooks', () => {
+    beforeEach(() => {
+      fixture = TestBed.createComponent(ListComponent);
+      component = fixture.componentInstance;
+    });
+
+    it('should call ngOnInit', () => {
+      const spyOnNgOnInit: jasmine.Spy = spyOn(component, 'ngOnInit').and.callThrough();
+      fixture.detectChanges();
+      expect(spyOnNgOnInit).toHaveBeenCalled();
     });
   });
 });

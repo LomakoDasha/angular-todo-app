@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule, MatToolbarModule } from '@angular/material';
 
 import { SearchBarComponent } from './search-bar.component';
-import { Component } from '@angular/core';
+import { Component, DebugElement } from '@angular/core';
 
 @Component({
   template: `
@@ -48,31 +48,30 @@ describe('SearchBarComponent', () => {
     });
 
     it('should render one input tag', () => {
-      const textareaElement = fixture.debugElement.queryAll(By.css('input'));
+      const textareaElement: DebugElement[] = fixture.debugElement.queryAll(By.css('input'));
       expect(textareaElement.length).toBe(1);
     });
 
     it('should render "Search" button', () => {
-      const buttonElement = fixture.debugElement.query(By.css('button'));
+      const buttonElement: DebugElement = fixture.debugElement.query(By.css('button'));
       expect(buttonElement.nativeElement.textContent).toEqual('Search');
     });
   });
 
-  describe('test @Output', () => {
+  describe('@Output', () => {
     beforeEach(() => {
       fixture.detectChanges();
     });
 
     it('should trigger keyup event on input tag', () => {
-      const inputElement = fixture.debugElement.query(By.css('input'));
+      const inputElement: DebugElement = fixture.debugElement.query(By.css('input'));
       inputElement.triggerEventHandler('keyup', null);
       expect(testComponent.itemForSearch).toEqual('search text');
     });
 
     it('should trigger click event on button tag', () => {
-      const buttonElement = fixture.debugElement.query(By.css('button'));
+      const buttonElement: DebugElement = fixture.debugElement.query(By.css('button'));
       buttonElement.triggerEventHandler('click', null);
-
       expect(testComponent.itemForSearch).toEqual('search text');
     });
   });
