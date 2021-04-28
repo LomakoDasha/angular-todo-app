@@ -1,10 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Location } from '@angular/common';
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockStore } from '@ngrx/store/testing';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { EditLabelAction } from '../../actions/list.actions';
 
 import { EditLabelPageComponent } from './edit-label-page.component';
 
@@ -13,6 +15,8 @@ class DummyComponent {
 }
 
 describe('EditLabelPageComponent', () => {
+  let mockStore: Store<any>;
+  let storeSpy: jasmine.Spy;
   let component: EditLabelPageComponent;
   let fixture: ComponentFixture<EditLabelPageComponent>;
   const routerSpy = {navigate: jasmine.createSpy('navigate')};
@@ -90,6 +94,19 @@ describe('EditLabelPageComponent', () => {
       component.editLabel(initialState.tasks);
       fixture.detectChanges();
       expect(routerSpy.navigate).toHaveBeenCalledWith(['/list']);
+    });
+  });
+
+  describe('Redux work', () => {
+    beforeEach(() => {
+      mockStore = fixture.debugElement.injector.get(Store);
+      storeSpy = spyOn(mockStore, 'dispatch');
+    });
+
+    it('should call editLabel()', () => {
+      component.editLabel(initialState.tasks);
+      expect(storeSpy).toHaveBeenCalledTimes(1);
+      expect(storeSpy).toHaveBeenCalledWith(new EditLabelAction(initialState.tasks));
     });
   });
 });

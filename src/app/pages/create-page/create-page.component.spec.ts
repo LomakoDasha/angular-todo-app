@@ -4,6 +4,8 @@ import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockStore } from '@ngrx/store/testing';
+import { Store } from '@ngrx/store';
+import { CreateItemAction } from '../../actions/list.actions';
 
 import { CreatePageComponent } from './create-page.component';
 
@@ -12,6 +14,9 @@ class DummyComponent {
 }
 
 describe('CreatePageComponent', () => {
+  let mockStore: Store<any>;
+  let storeSpy: jasmine.Spy;
+  const activeRouteInfo = {id: '26546854168478'};
   let component: CreatePageComponent;
   let fixture: ComponentFixture<CreatePageComponent>;
   const routerSpy = {navigate: jasmine.createSpy('navigate')};
@@ -54,7 +59,7 @@ describe('CreatePageComponent', () => {
         {
           provide: ActivatedRoute,
           useValue: {
-            snapshot: {params: {id: '26546854168478'}}
+            snapshot: {params: activeRouteInfo}
           }
         }
       ],
@@ -87,6 +92,19 @@ describe('CreatePageComponent', () => {
       component.saveItem(initialState.tasks.subList[0]);
       fixture.detectChanges();
       expect(routerSpy.navigate).toHaveBeenCalledWith(['/list']);
+    });
+  });
+
+  describe('Redux work', () => {
+    beforeEach(() => {
+      mockStore = fixture.debugElement.injector.get(Store);
+      storeSpy = spyOn(mockStore, 'dispatch');
+    });
+
+    it('should call saveItem()', () => {
+      component.saveItem(initialState.tasks.subList[0]);
+      expect(storeSpy).toHaveBeenCalledTimes(1);
+      expect(storeSpy).toHaveBeenCalledWith(new CreateItemAction(initialState.tasks.subList[0], Number(activeRouteInfo.id)));
     });
   });
 });

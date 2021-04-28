@@ -1,18 +1,24 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
-import { RouterTestingModule } from '@angular/router/testing';
-import { provideMockStore } from '@ngrx/store/testing';
+import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Store } from '@ngrx/store';
+import { provideMockStore } from '@ngrx/store/testing';
 import { Observable } from 'rxjs';
+import { EditItemAction } from '../../actions/list.actions';
 
 import { EditPageComponent } from './edit-page.component';
-import { Location } from '@angular/common';
 
 @Component({template: ''})
 class DummyComponent {
 }
 
 describe('EditPageComponent', () => {
+  let mockStore: Store<any>;
+  let storeSpy: jasmine.Spy;
+  const activeRouteId = {id: '1544654465'};
+  const activeRouteList = '8888';
   let component: EditPageComponent;
   let fixture: ComponentFixture<EditPageComponent>;
   const routerSpy = {navigate: jasmine.createSpy('navigate')};
@@ -56,7 +62,9 @@ describe('EditPageComponent', () => {
         {
           provide: ActivatedRoute,
           useValue: {
-            snapshot: {params: {id: '1544654465'}}
+            snapshot: {
+              params: {activeRouteId, list: activeRouteList}
+            }
           }
         }
       ],
@@ -90,6 +98,19 @@ describe('EditPageComponent', () => {
       component.editItem(initialState.tasks.subList[0]);
       fixture.detectChanges();
       expect(routerSpy.navigate).toHaveBeenCalledWith(['/list']);
+    });
+  });
+
+  describe('Redux work', () => {
+    beforeEach(() => {
+      mockStore = fixture.debugElement.injector.get(Store);
+      storeSpy = spyOn(mockStore, 'dispatch');
+    });
+
+    it('should call editItem()', () => {
+      component.editItem(initialState.tasks.subList[0]);
+      expect(storeSpy).toHaveBeenCalledTimes(1);
+      expect(storeSpy).toHaveBeenCalledWith(new EditItemAction(initialState.tasks.subList[0], +activeRouteList));
     });
   });
 });

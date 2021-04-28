@@ -2,9 +2,11 @@ import { Component, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockStore } from '@ngrx/store/testing';
-import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AddNewListAction, CopyListAction, LoadAction, RemoveItemAction, RemoveListAction } from '../../actions/list.actions';
 
 import { ListComponent } from './list.component';
 
@@ -24,6 +26,8 @@ class TestListComponent {
 }
 
 describe('ListComponent', () => {
+  let mockStore: Store<any>;
+  let storeSpy: jasmine.Spy;
   let component: ListComponent;
   let testComponent: TestListComponent;
   let fixture: ComponentFixture<ListComponent>;
@@ -181,12 +185,48 @@ describe('ListComponent', () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(ListComponent);
       component = fixture.componentInstance;
+      mockStore = fixture.debugElement.injector.get(Store);
+      storeSpy = spyOn(mockStore, 'dispatch');
     });
 
     it('should call ngOnInit', () => {
       const spyOnNgOnInit: jasmine.Spy = spyOn(component, 'ngOnInit').and.callThrough();
       fixture.detectChanges();
       expect(spyOnNgOnInit).toHaveBeenCalled();
+      expect(storeSpy).toHaveBeenCalledWith(new LoadAction());
+    });
+  });
+
+  describe('Redux work', () => {
+    beforeEach(() => {
+      fixture = TestBed.createComponent(ListComponent);
+      component = fixture.componentInstance;
+      mockStore = fixture.debugElement.injector.get(Store);
+      storeSpy = spyOn(mockStore, 'dispatch');
+    });
+
+    it('should call removeItem()', () => {
+      component.removeItem('');
+      expect(storeSpy).toHaveBeenCalledTimes(1);
+      expect(storeSpy).toHaveBeenCalledWith(new RemoveItemAction(''));
+    });
+
+    it('should call onListCopy()', () => {
+      component.onListCopy(initialState.tasks);
+      expect(storeSpy).toHaveBeenCalledTimes(1);
+      expect(storeSpy).toHaveBeenCalledWith(new CopyListAction(initialState.tasks));
+    });
+
+    it('should call onListRemove()', () => {
+      component.onListRemove(initialState.tasks);
+      expect(storeSpy).toHaveBeenCalledTimes(1);
+      expect(storeSpy).toHaveBeenCalledWith(new RemoveListAction(initialState.tasks));
+    });
+
+    it('should call onAddNewList()', () => {
+      component.onAddNewList();
+      expect(storeSpy).toHaveBeenCalledTimes(1);
+      expect(storeSpy).toHaveBeenCalledWith(new AddNewListAction());
     });
   });
 });
