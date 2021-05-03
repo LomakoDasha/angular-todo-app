@@ -7,6 +7,7 @@ import { ListActionTypes, LoadCompleteAction } from '../actions/list.actions';
 import { ListService } from '../services/list.service';
 import { getIsLoading } from '../reducers/list.reducer';
 import { IListState } from '../models/listState';
+import { IListOfItems } from '../models/listOfItems';
 
 @Injectable()
 export class ListEffects {
@@ -17,7 +18,7 @@ export class ListEffects {
     filter(([action, isLoading]) => isLoading),
     switchMap(
       () => this.listService.getItems().pipe(
-        map((items) => new LoadCompleteAction(items)),
+        map((items: IListOfItems[]) => new LoadCompleteAction(items)),
         catchError((error) => EMPTY)
       )
     ),

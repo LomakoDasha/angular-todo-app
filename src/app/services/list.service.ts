@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { IListOfItems } from '../models/listOfItems';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ListService {
-  private items = [
+  private items: IListOfItems[] = [
     {
       id: 1,
       listTitle: 'Label1',
@@ -60,7 +61,7 @@ export class ListService {
     },
   ];
 
-  public getItems() {
+  public getItems(): Observable<IListOfItems[]> {
     return of(this.items).pipe(delay(2000));
   }
 }
