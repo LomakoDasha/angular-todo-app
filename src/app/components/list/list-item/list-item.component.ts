@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
-import { Item } from 'src/app/models/toDoitem';
+import { IItem } from '../../../models/item';
 
 @Component({
   selector: 'app-list-item',
@@ -7,9 +7,9 @@ import { Item } from 'src/app/models/toDoitem';
   styleUrls: ['./list-item.component.scss']
 })
 export class ListItemComponent {
-  @Input() public item: Item;
-  @Output() public remove = new EventEmitter<Item>();
-  @Output() public edit = new EventEmitter<Item>();
+  @Input() public item: IItem;
+  @Output() public remove = new EventEmitter<IItem>();
+  @Output() public edit = new EventEmitter<IItem>();
 
   public onEdit() {
     this.edit.emit(this.item);

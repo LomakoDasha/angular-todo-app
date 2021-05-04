@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
-
-import { Item } from 'src/app/models/toDoitem';
+import { IItem } from '../../models/item';
 
 @Component({
   selector: 'app-edit-item-form',
@@ -10,17 +9,18 @@ import { Item } from 'src/app/models/toDoitem';
 })
 export class EditItemFormComponent implements OnInit {
   public itemForm: FormGroup;
-  @Input() public item: Item;
-  @Output() public save = new EventEmitter();
+  @Input() public item: IItem;
+  @Output() public save = new EventEmitter<IItem>();
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {
+  }
 
   ngOnInit() {
     this.itemForm = this.fb.group({
       id: ['', [Validators.required, this.isInteger]],
       title: ['', Validators.required],
       description: ['', Validators.required],
-      importanceFlag: ['', Validators.required]
+      importanceFlag: [null, Validators.required]
     });
 
     if (this.item) {
@@ -29,15 +29,10 @@ export class EditItemFormComponent implements OnInit {
   }
 
   public isInteger(control: AbstractControl) {
-    return Number.isInteger(+control.value) ? null : { noInteger: { value: control.value } };
+    return Number.isInteger(+control.value) ? null : {noInteger: {value: control.value}};
   }
 
   public submit() {
-    if (this.itemForm.value.importanceFlag === 'true') {
-      this.itemForm.value.importanceFlag = true;
-    } else {
-      this.itemForm.value.importanceFlag = false;
-    }
     this.save.emit(this.itemForm.value);
   }
 }

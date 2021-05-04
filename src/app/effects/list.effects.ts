@@ -3,11 +3,11 @@ import { Actions, ofType, Effect } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
 import { switchMap, map, catchError, withLatestFrom, filter } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
-
 import { ListActionTypes, LoadCompleteAction } from '../actions/list.actions';
 import { ListService } from '../services/list.service';
 import { getIsLoading } from '../reducers/list.reducer';
-import { ListState } from '../models/toDoitem';
+import { IListState } from '../models/listState';
+import { IListOfItems } from '../models/listOfItems';
 
 @Injectable()
 export class ListEffects {
@@ -18,11 +18,12 @@ export class ListEffects {
     filter(([action, isLoading]) => isLoading),
     switchMap(
       () => this.listService.getItems().pipe(
-        map((items) => new LoadCompleteAction(items)),
+        map((items: IListOfItems[]) => new LoadCompleteAction(items)),
         catchError((error) => EMPTY)
       )
     ),
   );
 
-  constructor(private actions$: Actions, private listService: ListService, private store: Store<ListState>) { }
+  constructor(private actions$: Actions, private listService: ListService, private store: Store<IListState>) {
+  }
 }

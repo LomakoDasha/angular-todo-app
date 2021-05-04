@@ -2,10 +2,10 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-
 import { getLists, getIsLoading } from 'src/app/reducers/list.reducer';
 import { LoadAction, RemoveItemAction, RemoveListAction, CopyListAction, AddNewListAction } from 'src/app/actions/list.actions';
-import { Item, ListState, ListOfItems } from 'src/app/models/toDoitem';
+import { IListState } from '../../models/listState';
+import { IListOfItems } from '../../models/listOfItems';
 
 @Component({
   selector: 'app-list',
@@ -18,10 +18,9 @@ export class ListComponent implements OnInit {
   public items$: Observable<any>;
   public isLoading$: Observable<boolean>;
 
-  constructor(
-    private router: Router,
-    private store: Store<ListState>
-  ) { }
+  constructor(private router: Router,
+              private store: Store<IListState>) {
+  }
 
   public ngOnInit(): void {
     this.items$ = this.store.pipe(select(getLists));
@@ -30,7 +29,7 @@ export class ListComponent implements OnInit {
   }
 
   public editItem(args) {
-    const { list, item } = args;
+    const {list, item} = args;
     this.router.navigate(['edit', list.id, item.id]);
   }
 
@@ -38,24 +37,24 @@ export class ListComponent implements OnInit {
     this.store.dispatch(new RemoveItemAction(args));
   }
 
-  public createItem(item: ListOfItems) {
+  public createItem(item: IListOfItems) {
     this.router.navigate(['new', item.id]);
   }
 
-  public onLabelEdit(item: ListOfItems) {
+  public onLabelEdit(item: IListOfItems) {
     this.router.navigate(['editLabel', item.id]);
   }
 
-  public onListCopy(item: ListOfItems) {
+  public onListCopy(item: IListOfItems) {
     this.store.dispatch(new CopyListAction(item));
   }
 
-  public onListRemove(item: ListOfItems) {
+  public onListRemove(item: IListOfItems) {
     this.store.dispatch(new RemoveListAction(item));
   }
 
   public onAddNewList() {
-    this.addNewList.emit(this.items$)
+    this.addNewList.emit(this.items$);
     this.store.dispatch(new AddNewListAction());
   }
 }

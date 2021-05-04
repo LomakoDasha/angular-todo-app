@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Router, ActivatedRoute } from '@angular/router';
-
 import { CreateItemAction } from 'src/app/actions/list.actions';
-import { Item, ListState } from 'src/app/models/toDoitem';
+import { IListState } from '../../models/listState';
+import { IItem } from '../../models/item';
 
 @Component({
   selector: 'app-create-page',
@@ -12,9 +12,10 @@ import { Item, ListState } from 'src/app/models/toDoitem';
 })
 export class CreatePageComponent {
 
-  constructor(private store: Store<ListState>, private router: Router, private route: ActivatedRoute) { }
+  constructor(private store: Store<IListState>, private router: Router, private route: ActivatedRoute) {
+  }
 
-  public saveItem(value: Item) {
+  public saveItem(value: IItem) {
     this.store.dispatch(new CreateItemAction(value, Number(this.route.snapshot.params.id)));
     this.router.navigate(['/list']);
   }

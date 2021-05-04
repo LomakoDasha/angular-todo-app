@@ -1,16 +1,17 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-
 import { ListAction, ListActionTypes } from '../actions/list.actions';
-import { ListState } from '../models/toDoitem';
+import { IListState } from '../models/listState';
+import { IListOfItems } from '../models/listOfItems';
+import { IItem } from '../models/item';
 
-export const initialState: ListState = {
+export const initialState: IListState = {
   lists: [],
 };
 
 export function reducer(
-  state: ListState = initialState,
-  action: ListAction
-) {
+  state: IListState = initialState,
+  action: any
+): IListState {
   switch (action.type) {
     case ListActionTypes.Load: {
       return !state.lists.length
@@ -29,30 +30,30 @@ export function reducer(
     }
 
     case ListActionTypes.CreateItem: {
-      const { payload, route } = action;
+      const {payload, route} = action;
 
       return {
         ...state,
         lists: state.lists.map(
-          (list) => list.id === route
-            ? { ...list, subList: [...list.subList].concat(payload) }
+          (list: IListOfItems) => list.id === route
+            ? {...list, subList: [...list.subList].concat(payload)}
             : list
         )
       };
     }
 
     case ListActionTypes.EditItem: {
-      const { payload, route } = action;
+      const {payload, route} = action;
 
       return {
         ...state,
         lists: state.lists.map(
-          (list) => list.subList.some((item) => list.id === route && item.id === payload.id)
+          (list: IListOfItems) => list.subList.some((item: IItem) => list.id === route && item.id === payload.id)
             ? {
               ...list,
               subList: list.subList.map(
-                (item) => item.id === payload.id
-                  ? { ...item, ...payload }
+                (item: IItem) => item.id === payload.id
+                  ? {...item, ...payload}
                   : item
               )
             }
@@ -62,33 +63,33 @@ export function reducer(
     }
 
     case ListActionTypes.RemoveItem: {
-      const { list, item } = action.payload;
+      const {list, item} = action.payload;
 
       return {
         ...state,
         lists: state.lists.map(
-          (column) => column.id === list.id
-            ? { ...column, subList: column.subList.filter((currentItem) => currentItem.id !== item.id) }
+          (column: IListOfItems) => column.id === list.id
+            ? {...column, subList: column.subList.filter((currentItem: IItem) => currentItem.id !== item.id)}
             : column
         )
       };
     }
 
     case ListActionTypes.EditLabel: {
-      const { payload } = action;
+      const {payload} = action;
 
       return {
         ...state,
         lists: state.lists.map(
-          (list) => list.id === payload.id
-            ? { ...list, ...payload }
+          (list: IListOfItems) => list.id === payload.id
+            ? {...list, ...payload}
             : list
         )
       };
     }
 
     case ListActionTypes.CopyList: {
-      const { payload } = action;
+      const {payload} = action;
       const newItem = Object.assign({}, payload);
       newItem.id = state.lists.length + 1;
 
@@ -99,8 +100,8 @@ export function reducer(
     }
 
     case ListActionTypes.RemoveList: {
-      const { payload } = action;
-      state.lists.splice(payload.id - 1, 1)
+      const {payload} = action;
+      state.lists.splice(payload.id - 1, 1);
 
       return {
         ...state,
@@ -111,7 +112,7 @@ export function reducer(
     case ListActionTypes.AddNewList: {
       const newItem = {
         id: state.lists.length + 1,
-        listTitle: "New list",
+        listTitle: 'New list',
         subList: []
       };
 
@@ -127,21 +128,21 @@ export function reducer(
   }
 }
 
-export const getListState = createFeatureSelector<ListState>('tasks');
+export const getListState = createFeatureSelector<IListState>('tasks');
 
 export const getLists = createSelector(
   getListState,
-  (state) => state.lists
+  (state: IListState) => state.lists
 );
 
 export const getIsLoading = createSelector(
   getListState,
-  (state) => state.isLoading
+  (state: IListState) => state.isLoading
 );
 
 export const getListById = createSelector(
   getLists,
-  (lists, { id }) => {
+  (lists: IListOfItems[], {id}) => {
     for (const list of lists) {
       if (list.id === id) {
         return list;
@@ -152,7 +153,7 @@ export const getListById = createSelector(
 
 export const getItemById = createSelector(
   getLists,
-  (lists, { id }) => {
+  (lists: IListOfItems[], {id}) => {
     for (const list of lists) {
       for (const item of list.subList) {
         if (item.id === id) {
