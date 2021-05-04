@@ -1,4 +1,6 @@
 import * as fromActions from '../actions/list.actions';
+import { IListOfItems } from '../models/listOfItems';
+import { IItem } from '../models/item';
 
 import * as fromReducer from './list.reducer';
 
@@ -42,8 +44,26 @@ describe('ListReducer', () => {
     const initialState = {
       lists: [
         {
-          id: 145,
-          listTitle: 'text',
+          id: 1,
+          listTitle: 'Label1',
+          subList: [
+            {
+              id: 23,
+              title: 'Title',
+              description: 'text',
+              importanceFlag: false
+            },
+            {
+              id: 12,
+              title: 'Title2',
+              description: 'sometext12',
+              importanceFlag: true
+            }
+          ]
+        },
+        {
+          id: 35,
+          listTitle: 'data',
           subList: []
         }
       ],
@@ -51,14 +71,8 @@ describe('ListReducer', () => {
     };
     const result = {
       lists: {
-        lists: [
-          {
-            id: 145,
-            listTitle: 'text',
-            subList: []
-          }
-        ],
-        isLoading: false
+        lists: initialState.lists,
+        isLoading: initialState.isLoading
       },
       isLoading: false
     };
@@ -71,8 +85,26 @@ describe('ListReducer', () => {
     const initialState = {
       lists: [
         {
-          id: 145,
-          listTitle: 'text',
+          id: 1,
+          listTitle: 'Label1',
+          subList: [
+            {
+              id: 23,
+              title: 'Title',
+              description: 'text',
+              importanceFlag: false
+            },
+            {
+              id: 12,
+              title: 'Title2',
+              description: 'sometext12',
+              importanceFlag: true
+            }
+          ]
+        },
+        {
+          id: 35,
+          listTitle: 'data',
           subList: []
         }
       ],
@@ -84,18 +116,42 @@ describe('ListReducer', () => {
       description: 'text',
       importanceFlag: false
     };
-    const route = 111;
+    const route = 35;
+    const updatedList = initialState.lists.map(
+      (list: IListOfItems) => list.id === route
+        ? {...list, subList: [...list.subList].concat(payload)}
+        : list
+    );
+
     const action = new fromActions.CreateItemAction(payload, route);
     const state = fromReducer.reducer(initialState, action);
-    expect(state.lists).toEqual(initialState.lists);
+    expect(state.lists).toEqual(updatedList);
   });
 
   it('EditItem action', () => {
     const initialState = {
       lists: [
         {
-          id: 145,
-          listTitle: 'text',
+          id: 1,
+          listTitle: 'Label1',
+          subList: [
+            {
+              id: 23,
+              title: 'Title',
+              description: 'text',
+              importanceFlag: false
+            },
+            {
+              id: 12,
+              title: 'Title2',
+              description: 'sometext12',
+              importanceFlag: true
+            }
+          ]
+        },
+        {
+          id: 35,
+          listTitle: 'data',
           subList: []
         }
       ],
@@ -103,20 +159,60 @@ describe('ListReducer', () => {
     };
     const payload = {
       id: 23,
-      title: 'Title',
-      description: 'text',
-      importanceFlag: false
+      title: 'Title 23',
+      description: 'text 23',
+      importanceFlag: true
     };
-    const route = 111;
+    const route = 1;
+    const updatedList = initialState.lists.map(
+      (list: IListOfItems) => list.subList.some((item: IItem) => list.id === route && item.id === payload.id)
+        ? {
+          ...list,
+          subList: list.subList.map(
+            (item: IItem) => item.id === payload.id
+              ? {...item, ...payload}
+              : item
+          )
+        }
+        : list
+    );
+
     const action = new fromActions.EditItemAction(payload, route);
     const state = fromReducer.reducer(initialState, action);
-    expect(state.lists).toEqual(initialState.lists);
+    expect(state.lists).toEqual(updatedList);
   });
 
   it('RemoveItem action', () => {
-    const {initialState} = fromReducer;
+    const initialState = {
+      lists: [
+        {
+          id: 1,
+          listTitle: 'Label1',
+          subList: [
+            {
+              id: 23,
+              title: 'Title',
+              description: 'text',
+              importanceFlag: false
+            },
+            {
+              id: 12,
+              title: 'Title2',
+              description: 'sometext12',
+              importanceFlag: true
+            }
+          ]
+        },
+        {
+          id: 35,
+          listTitle: 'data',
+          subList: []
+        }
+      ],
+      isLoading: false
+    };
     const payload = {
-      lists: {
+      list: {
         id: 1,
         listTitle: 'Label1',
         subList: [
@@ -125,12 +221,13 @@ describe('ListReducer', () => {
             title: 'Title',
             description: 'text',
             importanceFlag: false
-          }, {
+          },
+          {
             id: 12,
             title: 'Title2',
             description: 'sometext12',
             importanceFlag: true
-          },
+          }
         ]
       },
       item: {
@@ -140,21 +237,47 @@ describe('ListReducer', () => {
         importanceFlag: false
       }
     };
+    const updatedList = initialState.lists.map(
+      (list: IListOfItems) => list.id === payload.list.id
+        ? {...list, subList: list.subList.filter((currentItem: IItem) => currentItem.id !== payload.item.id)}
+        : list
+    );
+
     const action = new fromActions.RemoveItemAction(payload);
     const state = fromReducer.reducer(initialState, action);
-    expect(state.lists).toEqual(initialState.lists);
+    expect(state.lists).toEqual(updatedList);
   });
 
   it('EditLabel action', () => {
-    const {initialState} = fromReducer;
+    const initialState = {
+      lists: [
+        {
+          id: 145,
+          listTitle: 'text',
+          subList: []
+        },
+        {
+          id: 35,
+          listTitle: 'data',
+          subList: []
+        }
+      ],
+      isLoading: false
+    };
     const payload = {
       id: 145,
-      listTitle: 'text',
+      listTitle: 'text123',
       subList: []
     };
+    const updatedList = initialState.lists.map(
+      (list: IListOfItems) => list.id === payload.id
+        ? {...list, ...payload}
+        : list
+    );
+
     const action = new fromActions.EditLabelAction(payload);
     const state = fromReducer.reducer(initialState, action);
-    expect(state.lists).toEqual(initialState.lists);
+    expect(state.lists).toEqual(updatedList);
   });
 
   it('CopyList action', () => {
